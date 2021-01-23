@@ -1,3 +1,3 @@
-name = input("Hello! What is your name? ")
-print("Congratulations, {}! You are the best!".format(name))
+age = input("Hello! What is your age? ")
+print("Congratulations, you're {} years old! You are the best!".format(age))
 

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- <link rel="stylesheet" href="style.css"> -->
+<title>TESTING HTML</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+header {
+  overflow: hidden;
+  margin-bottom: 8vw;
+}
+.header.text {
+  overflow: hidden;
+  font: italic 2vw Times;
+  letter-spacing: 1px;
+  text-align: left;
+  margin-left: 50px;
+}
+body {
+  background-color: #ff6b50;
+  color: #fffdf5;
+  /* style variant weight size/height font-family */
+  font: 100% sans-serif;
+}
+.topnav {
+  overflow: hidden;
+}
+.topnav a {
+  font-size: 40%;
+  letter-spacing: 1px;
+  float: right;
+}
+.column {
+  float: left;
+  /* font-size: 3.7vw; */
+}
+.column.side {
+  width: 25%;
+  margin-left: 50px;
+  margin-bottom: 30px;
+}  
+.column.middle {
+  width: 50%;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}  
+section::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle, .column.right {
+  width: 100%;
+    }
+}
+footer {
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 15px;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,.25);
+  font-size: 80%;
+  font-style: italic;
+  background-color: #ff6b50;
+}
+h1 {
+  font: lighter 15vw Helvetica;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+}
+h2 {
+  font: lighter 100% Helvetica;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+a {
+  text-decoration: none;
+  color: darkslateblue;
+}
+caption {
+  text-align: left;
+}
+</style>
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <a href="index.html">HOME&nbsp;&nbsp;</a>
+            <a href="videos.html">VIDEOS&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="links.html">LINKS&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="tables.html">TALBES&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="lists.html">LISTS&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="images.html">IMAGES&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="containers.html">CONTAINERS&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="input.html">INPUT & FORM&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="iframes.html">IFRAMES&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+        <h1>TESTIN<i>G</i><br/>
+        HT<i>M</i>&thinsp;L</h1>
+        <div class="header text">
+            // this website's purpose is to test html <br/>
+            basics copied 
+            <a href="https://www.youtube.com/watch?v=Ny1g1eQHnCI&feature=emb_logo" target="_blank">
+            here</a> // 
+        </div>
+    </header>
+
+    <aside>
+        <div class="column side">
+            <h2>Links used</h2>
+            <p>
+                basics of html<br/>
+                <a href="https://www.mikedane.com/web-development/html/" target="_blank">mikedane.com</a>
+                <br/>
+                <br/>
+                page layout<br/>
+                <a href="https://www.w3schools.com/css/css_website_layout.asp" target="_blank">w3schools.com</a>
+                <br/>
+                <br/>
+                margins<br/>
+                <a href="https://www.w3schools.com/css/css_margin.asp" target="_blank">w3schools.com</a>
+                <br/>
+                <br/>
+                navigation bar<br/>
+                <a href="https://www.w3schools.com/howto/howto_css_topnav_right.asp" target="_blank">w3schools.com</a>
+                <br/>
+                <br/>
+                fixed footer<br/>
+                <a href="https://www.w3schools.com/howto/howto_css_fixed_footer.asp" target="_blank">w3schools.com</a>
+                <br/>
+                <br/>
+                responsive design<br/>
+                <a href="https://www.w3schools.com/html/html_responsive.asp" target="_blank">w3schools.com</a>
+                <br/>
+                <br/>
+                css colors<br/>
+                <a href="https://www.w3schools.com/cssref/css_colors.asp" target="_blank">w3schools.com</a>
+            </p>
+        </div>
+    </aside>
+
+    <div class="column middle">
+        <h2> Basic idea</h2>
+        <p>The whole website is usually divided into three:
+        <ol> 
+            <li>Header</li>
+            <li>Main</li>
+            <li>Footer</li>
+        </ol>
+        These three parts can be again divided into own sections. <br/>
+        Sections give <i>structure</i> to the website. </br>
+        Good structure helps the search engines find relevant info on your site. <br/>
+        They also help others (and you) to understand whats happening.
+        </p>
+
+        <!-- CONTAINERS -->
+        <h2>Containers</h2>
+        <p>Most popular are spans (inline) and divs (block containers).</p>
+            <dl> 
+            <dt>Inline = takes only as much spaces as needed</dt>
+              <dd>
+                <a href="#"> link1</a>   <!-- inline element-->
+                <a href="#"> link2</a>
+                <span>span1</span>
+                <span>span2</span>
+              </dd>
+            </dl>
+            <dl> 
+              <dt>Block = takes the whole width of the row</dt>
+                <dd>
+                  <div>div1</div>
+                  <div>div2</div>
+                </dd>
+            </dl>
+            
+        <!-- TABELS-->
+        <h2>Tables</h2>
+        <p>
+        <table>
+          <thead> 
+              <caption>List of Numbers</caption>
+              <tr> <!-- COLUMN TITLE -->
+                  <th>num1</th>
+                  <th>num2</th>
+                  <th>num3</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr> <!-- TABLE ROW, horizontal row, ONE-->
+                  <!-- Table data-->
+                  <!-- <td colspan="2">one</td> 
+                       colspan = how many columns an entry takes-->
+                  <td>one</td>
+                  <td>two</td>
+                  <td>three</td>
+              </tr>
+              <tr> <!-- SECOND TABLE ROW -->
+                  <td>four</td>
+                  <td>five</td>
+                  <td>six</td>
+              </tr>
+          </tbody>
+      </table>
+      </p>
+    </div>
+    <footer>
+    </footer>
+</body>
+</html>

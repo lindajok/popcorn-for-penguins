@@ -5,6 +5,7 @@ documents = ["This is a silly example",
              "Nothing to see here",
              "This is a great and long example"]
 
+
 cv = CountVectorizer(lowercase=True, binary=True)
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()
@@ -35,12 +36,10 @@ def print_results():
     for i, doc_idx in enumerate(hits_list):
         print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
 
-user_input = ""
-
-while user_input != "quit":
-    user_input = input("Write the query: ")
-
-    if user_input == "quit":
+user_input = "0"
+while user_input != "":
+    user_input = input("Write the query (to stop press Enter): ")
+    if user_input == "":
         break
     else:
         test_query(user_input)

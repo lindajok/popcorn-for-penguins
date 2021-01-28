@@ -29,10 +29,20 @@ def test_query(query):
     print("Matching:", eval(rewrite_query(query))) # Eval runs the string as a Python command
     print()
 
-user_input = input("Write the query: ")
-test_query(user_input)
+def print_results():
+    hits_matrix = eval(rewrite_query(user_input)) #!
+    hits_list = list(hits_matrix.nonzero()[1])
+    for i, doc_idx in enumerate(hits_list):
+        print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
 
-hits_matrix = eval(rewrite_query(user_input)) #!
-hits_list = list(hits_matrix.nonzero()[1])
-for i, doc_idx in enumerate(hits_list):
-    print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
+user_input = ""
+
+while user_input != "quit":
+    user_input = input("Write the query: ")
+
+    if user_input == "quit":
+        break
+    else:
+        test_query(user_input)
+        print_results()
+

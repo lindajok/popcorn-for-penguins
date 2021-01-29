@@ -13,12 +13,11 @@ td_matrix = dense_matrix.T
 sparse_td_matrix = sparse_matrix.T.tocsr()
 t2i = cv.vocabulary_
 
-d = {"and": "&", "AND": "&",
+def rewrite_token(t):
+    d = {"and": "&", "AND": "&",
      "or": "|", "OR": "|",
      "not": "1 -", "NOT": "1 -",
-     "(": "(", ")": ")"} 
-
-def rewrite_token(t):
+     "(": "(", ")": ")"}
     return d.get(t, 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t)) # Make retrieved rows dense
 
 def rewrite_query(query): # rewrite every token in the query

@@ -5,7 +5,6 @@ documents = ["This is a silly example",
              "Nothing to see here",
              "This is a great and long example"]
 
-
 cv = CountVectorizer(lowercase=True, binary=True)
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()

@@ -37,9 +37,12 @@ def print_results():
 user_input = "0"
 while user_input != "":
     user_input = input("Write the query (to stop press Enter): ")
-    if user_input == "":
-        break
-    else:
-        test_query(user_input)
-        print_results()
+    try:
+        if user_input == "":
+            break
+        else:
+            test_query(user_input)
+            print_results()
+    except KeyError:
+        print("Bad query")
 

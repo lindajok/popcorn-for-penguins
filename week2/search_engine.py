@@ -1,10 +1,35 @@
 from sklearn.feature_extraction.text import CountVectorizer
 
+'''
+# Leaving this here for testing purposes and in case my file-reading code doesn't work at all! -Anna-Erika
 documents = ["This is a silly example",
              "A better example",
              "Nothing to see here",
              "This is a great and long example"]
+'''
 
+docs = []
+documents = []
+document_input = "0"
+while document_input != "":
+    if document_input == "exit":
+        break
+    try:
+        document_input = input("Select files to analyse. Type exit to stop: ")
+        with open(document_input) as file:
+            docs.append(file.read().splitlines())
+                #for doc in docs:
+                  #  string_document = "".join(doc)
+                  #  documents.append(string_document)
+    except FileNotFoundError:
+        print("Didn't find such file.")
+
+for doc in docs:
+    string_document = ''.join(doc)
+    documents.append(string_document)
+
+print(documents)
+    
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()

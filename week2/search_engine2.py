@@ -58,7 +58,6 @@ def print_results():
     print(hits_matrix)
     hits_list = list(hits_matrix.nonzero()[1])
     print(hits_list)
-    print(doc_idx)
     for i, doc_idx in enumerate(hits_list):
         print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
 

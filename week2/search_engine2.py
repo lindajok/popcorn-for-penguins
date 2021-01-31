@@ -1,13 +1,13 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from bs4 import BeautifulSoup
-    
+import io
+
 def prepare_data():
     """ Read a file and make a list of strings """
     
     documents = []
     article = ""
-
-    f = open("data100.txt", "r")    # Change the name if you want to test with the 1000 article file
+    f = io.open("data100.txt", mode="r", encoding="utf-8" )    # Change the name if you want to test with the 1000 article file
     
     for line in f:
         line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it

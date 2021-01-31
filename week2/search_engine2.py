@@ -11,7 +11,7 @@ def prepare_data():
     
     for line in f:
         line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it
-        line = line.lower()                                                         # will parse wrong [heading and first word of a paragpraph will
+                                                                                    # will parse wrong [heading and first word of a paragpraph will
                                                                                     # join together]. Other solution?)
         if line == "</article> ":                                           # Locate boundaries between articles
                 clean_version = BeautifulSoup(article, "html.parser").text  # Remove tags

@@ -39,7 +39,8 @@ def rewrite_token(t):
     d = {"and": "&", "AND": "&",
      "or": "|", "OR": "|",
      "not": "1 -", "NOT": "1 -",
-     "(": "(", ")": ")"}
+     "(": "(", ")": ")"
+     }
     return d.get(t, 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t)) # Make retrieved rows dense
 
 def rewrite_query(query): # rewrite every token in the query
@@ -53,8 +54,11 @@ def rewrite_query(query): # rewrite every token in the query
 #     print()
 
 def print_results():
-    hits_matrix = eval(rewrite_query(user_input)) #!
+    hits_matrix = eval(rewrite_query(user_input))
+    print(hits_matrix)
     hits_list = list(hits_matrix.nonzero()[1])
+    print(hits_list)
+    print(doc_idx)
     for i, doc_idx in enumerate(hits_list):
         print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
 

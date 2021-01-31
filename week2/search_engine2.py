@@ -11,7 +11,7 @@ def prepare_data():
     
     for line in f:
         line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it
-                                                                                    # will parse wrong [heading and first word of a paragpraph will
+        line = line.lower()                                                         # will parse wrong [heading and first word of a paragpraph will
                                                                                     # join together]. Other solution?)
         if line == "</article> ":                                           # Locate boundaries between articles
                 clean_version = BeautifulSoup(article, "html.parser").text  # Remove tags
@@ -27,6 +27,7 @@ def prepare_data():
 documents = prepare_data() # Documents in a list of strings format, left as a global variable
 
 # This is the code we had earlier -->
+# We could eventually put it into a function too
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()
@@ -59,7 +60,7 @@ def print_results():
 
 user_input = "0"
 while user_input != "":
-    user_input = input("Write the query (to stop press Enter): ")
+    user_input = input("Write the query (to stop press Enter): ").lower()
     try:
         if user_input == "":
             break

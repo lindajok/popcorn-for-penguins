@@ -1,18 +1,19 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from bs4 import BeautifulSoup
 
-""" Read a document """
-documents = []                  # list of strings of documents
+""" Read a file and make a list of strings """
+
+documents = []                  # List of strings of documents (maybe leave this as a global variable and put the rest to a function?)
 article = ""                    
-f = open("data100.txt", "r")    # change the name if you want to test with other documents
+f = open("data100.txt", "r")    # Change the name if you want to test with the 1000 article file
 for line in f:
-        line = line.replace('\n', ' ')                                      # replace newline characers with space (have to add a space, otherwise it will parse wrong. some other solution welcomed, this is not the best.)
-        if line == "</article> ":                                           # locate boundaries between articles
-                clean_version = BeautifulSoup(article, "html.parser").text  # remove html tags
-                documents.append(clean_version)                             # add the article string without html tags to the list of documents
-                article=""                                                  # define "auxiliary" variable again
+        line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it will parse wrong [heading and first word of a paragpraph will join together]. Other solution?)
+        if line == "</article> ":                                           # Locate boundaries between articles
+                clean_version = BeautifulSoup(article, "html.parser").text  # Remove tags
+                documents.append(clean_version)                             # Add the article string without tags to the list of documents
+                article=""                                                  # Define "auxiliary" variable again
         else:
-                article+=line                                               
+                article+=line                                                                        
 f.close()
 
 # This is the code we had earlier -->

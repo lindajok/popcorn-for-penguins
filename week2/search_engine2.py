@@ -1,20 +1,30 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from bs4 import BeautifulSoup
+    
+def prepare_data():
+    """ Read a file and make a list of strings """
+    
+    documents = []
+    article = ""
 
-""" Read a file and make a list of strings """
-
-documents = []                  # List of strings of documents (maybe leave this as a global variable and put the rest to a function?)
-article = ""                    
-f = open("data100.txt", "r")    # Change the name if you want to test with the 1000 article file
-for line in f:
-        line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it will parse wrong [heading and first word of a paragpraph will join together]. Other solution?)
+    f = open("data100.txt", "r")    # Change the name if you want to test with the 1000 article file
+    
+    for line in f:
+        line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it
+                                                                                    # will parse wrong [heading and first word of a paragpraph will
+                                                                                    # join together]. Other solution?)
         if line == "</article> ":                                           # Locate boundaries between articles
                 clean_version = BeautifulSoup(article, "html.parser").text  # Remove tags
                 documents.append(clean_version)                             # Add the article string without tags to the list of documents
                 article=""                                                  # Define "auxiliary" variable again
         else:
                 article+=line                                                                        
-f.close()
+    
+    f.close()
+    
+    return documents
+
+documents = prepare_data() # Documents in a list of strings format, left as a global variable
 
 # This is the code we had earlier -->
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')

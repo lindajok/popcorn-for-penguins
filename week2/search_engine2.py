@@ -64,7 +64,7 @@ def print_results():
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
     for i, doc_idx in enumerate(hits_list):
-        print("Matching doc #{:d}: {:s}".format(i, documents[doc_idx]))
+        print("Matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
 
 
 user_input = "0"

@@ -63,6 +63,7 @@ def rewrite_query(query): # rewrite every token in the query
 def print_results():
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
+    print("Number of matching documents: {:d}".format(len(hits_list)))
     for i, doc_idx in enumerate(hits_list):
         print("Matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
 

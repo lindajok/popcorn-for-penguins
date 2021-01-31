@@ -60,7 +60,7 @@ def print_results():
 
 user_input = "0"
 while user_input != "":
-    user_input = input("Write the query (to stop press Enter): ").lower()
+    user_input = input("Write the query (press enter to stop): ").lower()
     try:
         if user_input == "":
             break

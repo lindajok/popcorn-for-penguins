@@ -1,4 +1,3 @@
-from numpy.matrixlib.defmatrix import matrix
 from sklearn.feature_extraction.text import CountVectorizer
 from bs4 import BeautifulSoup
 import io
@@ -51,15 +50,13 @@ def print_results(user_input):
     for w in user_input.split():
         try:    
             hits_matrix = eval(rewrite_query(w))
-            hits_list = list(hits_matrix.nonzero()[1])
+            hits_list = list(hits_matrix.nonzero()[1])		# If crashes, means that the word is not in the documents
         except:
             not_in_dict.append(w)
 
     try:
         hits_matrix = eval(rewrite_query(user_input))
-        # print(hits_matrix)
         hits_list = list(hits_matrix.nonzero()[1])
-        # print("LIST hits_matrix", list(hits_matrix))
         print("Total number of matching documents: {:d}".format(len(hits_list)))
         for i, doc_idx in enumerate(hits_list):
             if i > 4:

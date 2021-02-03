@@ -8,7 +8,7 @@ def prepare_data():
     
     documents = []
     article = ""
-    f = io.open("data100.txt", mode="r", encoding="utf-8" )    # Change the name if you want to test with the 1000 article file
+    f = io.open("100.txt", mode="r", encoding="utf-8" )    # Change the name if you want to test with the 1000 article file
     
     for line in f:
         line = line.replace('\n', ' ')                                      # Replace newline characers with space (have to add a space, otherwise it
@@ -61,14 +61,17 @@ def rewrite_query(query): # rewrite every token in the query
 
 
 def print_results():
-    hits_matrix = eval(rewrite_query(user_input))
-    hits_list = list(hits_matrix.nonzero()[1])
-    print("Total number of matching documents: {:d}".format(len(hits_list)))
-    for i, doc_idx in enumerate(hits_list):
-        if i > 4:
-            break
-        else:
-            print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
+    try:
+        hits_matrix = eval(rewrite_query(user_input))
+        hits_list = list(hits_matrix.nonzero()[1])
+        print("Total number of matching documents: {:d}".format(len(hits_list)))
+        for i, doc_idx in enumerate(hits_list):
+            if i > 4:
+                break
+            else:
+                print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
+    except:
+        print("Oops, someting went wrong.")
 
 
 user_input = "0"

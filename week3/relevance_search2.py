@@ -17,7 +17,7 @@ while user_doc =! "":
 '''
 
 title_list = []
-f = io.open("data100.txt", mode="r", encoding="utf-8" )
+f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
 for line in f:
     line = line.replace('\n', '')
     if "<article name=" in line:
@@ -32,7 +32,7 @@ titles = separator.join(title_list)
 def prepare_data():
     documents = []
     article = ""
-    f = io.open("data100.txt", mode="r", encoding="utf-8" )
+    f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
 
     for line in f:
         line = line.replace('\n', ' ')

@@ -19,7 +19,6 @@ def title_list():
     separator = '\n'
     return separator.join(title_list)
 
-titles = title_list() # A string of title names, left as global variable
 
 def prepare_data():
     """ Read a file and make a list of strings """
@@ -40,12 +39,14 @@ def prepare_data():
     
     return documents
 
-documents = prepare_data() # Documents in a list of strings format, left as a global variable
-
-tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
-sparse_matrix = tfv5.fit_transform(documents).T.tocsr() # CSR: compressed sparse row format => order by terms
 
 def print_results(user_input):
+    titles = title_list() # A string of title names
+    documents = prepare_data() # Documents in a list of strings format
+
+    tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
+    sparse_matrix = tfv5.fit_transform(documents).T.tocsr() # CSR: compressed sparse row format => order by terms
+
     query_vec5 = tfv5.transform([user_input]).tocsc()
     hits = np.dot(query_vec5, sparse_matrix)
 
@@ -53,15 +54,18 @@ def print_results(user_input):
     for score, i in ranked_scores_and_doc_ids:
         print("The score of {} is {:.4f} in document: {:s}...".format(user_input, score, documents[i][:50]))
 
-user_input = "0"
-while user_input != "":
-    user_input = input("Write the query (press enter to stop): ").lower()
-    try:
-        if user_input == "":
-            break
-        else:
-            print_results(user_input)
-    except KeyError:
-        print("Bad query")
+
+def main():
+    user_input = "0"
+    while user_input != "":
+        user_input = input("Write the query (press enter to stop): ").lower()
+        try:
+            if user_input == "":
+                break
+            else:
+                print_results(user_input)
+        except KeyError:
+            print("Bad query")
+main()
 
 

@@ -7,7 +7,7 @@ def prepare_data():
     """ Read a file and make a list of strings """
     documents = []
     article = ""
-    f = io.open("candide.txt", mode="r", encoding="utf-8" )    
+    f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )    
     
     for line in f:
         line = line.replace('\n', ' ')                                      

@@ -5,7 +5,7 @@ import numpy as np
 
 
 def title_list():
-    """ Read a file and make a string with titles of the document """
+    """ Read a file and make a list with titles of the document """
     title_list = []
     f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
     for line in f:
@@ -16,8 +16,7 @@ def title_list():
             title_list.append(line)
     f.close()
 
-    separator = '\n'
-    return separator.join(title_list)
+    return title_list
 
 
 def prepare_data():

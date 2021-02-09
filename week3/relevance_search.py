@@ -3,6 +3,24 @@ from bs4 import BeautifulSoup
 import io
 import numpy as np
 
+
+def title_list():
+    """ Read a file and make a string with titles of the document """
+    title_list = []
+    f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
+    for line in f:
+        line = line.replace('\n', '')
+        if "<article name=" in line:
+            line = line.replace('<article name="', '')
+            line = line.replace('">', '')
+            title_list.append(line)
+    f.close()
+
+    separator = '\n'
+    return separator.join(title_list)
+
+titles = title_list() # A string of title names, left as global variable
+
 def prepare_data():
     """ Read a file and make a list of strings """
     documents = []

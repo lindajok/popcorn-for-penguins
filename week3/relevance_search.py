@@ -40,18 +40,24 @@ def prepare_data():
 
 
 def print_results(user_input):
-    titles = title_list() # A string of title names
+    titles = title_list() # A list of title names
     documents = prepare_data() # Documents in a list of strings format
 
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(documents).T.tocsr() # CSR: compressed sparse row format => order by terms
-
     query_vec5 = tfv5.transform([user_input]).tocsc()
     hits = np.dot(query_vec5, sparse_matrix)
-
     ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
+    
     for score, i in ranked_scores_and_doc_ids:
-        print("The score of {} is {:.4f} in document: {:s}...".format(user_input, score, documents[i][:50]))
+        cut = documents[i]
+        first_occurrence = cut.find(user_input)
+
+        if first_occurrence == -1:
+            print("The input not found")
+        else:
+            print("The score of {} is {:.4f} in document {}: {:s}{:s}...".format(user_input, score, 
+                titles[i], cut[first_occurrence-50:first_occurrence], cut[first_occurrence:first_occurrence+50]))
 
 
 def main():

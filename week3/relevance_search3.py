@@ -5,6 +5,7 @@ import numpy as np
 import nltk
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
+import copy
 # from nltk.corpus import stopwords                         # in case we want to use stop words
 stemmer = PorterStemmer() # made it global
 
@@ -53,11 +54,11 @@ def prepare_data():
     return documents
 
 
-# The original output from the tutorial:
 def print_results(user_input):
     # documents = stemming(prepare_data())
     documents = prepare_data()
-    stemmed_documents = stemming(documents) 
+    documents_copy = copy.copy(documents)
+    stemmed_documents = stemming(documents_copy) 
     user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
 
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
@@ -68,7 +69,7 @@ def print_results(user_input):
     ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
     for score, i in ranked_scores_and_doc_ids:
         first_occurrence = documents[i].find(user_input)
-        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, stemmed_documents[i][first_occurrence:first_occurrence+50]))
+        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, documents[i][first_occurrence:first_occurrence+50]))
 
 
 ######################################################################

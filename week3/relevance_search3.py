@@ -6,10 +6,9 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 # from nltk.corpus import stopwords                         # in case we want to use stop words
-
+stemmer = PorterStemmer() # made it global
 
 def stemming(documents):
-    stemmer = PorterStemmer()
     for i in range(len(documents)):
         # toknize all the words in the documents
         words = nltk.word_tokenize(documents[i])           
@@ -59,7 +58,7 @@ def prepare_data():
 
 # The original output from the tutorial:
 def print_results(user_input):
-    documents = prepare_data()
+    documents = stemming(prepare_data())
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(documents).T.tocsr() # CSR: compressed sparse row format => order by terms
     query_vec5 = tfv5.transform([user_input]).tocsc()
@@ -67,7 +66,8 @@ def print_results(user_input):
 
     ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
     for score, i in ranked_scores_and_doc_ids:
-        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, documents[i][:50]))
+        first_occurrence = documents[i].find(user_input)
+        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, documents[i][first_occurrence:first_occurrence+50]))
 
 
 ######################################################################
@@ -111,6 +111,9 @@ def main():
     user_input = "0"
     while user_input != "":
         user_input = input("Write the query (press enter to stop): ").lower()
+        user_input = nltk.word_tokenize(user_input)
+        user_input = [stemmer.stem(word) for word in user_input]
+        user_input = ' '.join([word for word in user_input])
         try:
             if user_input == "":
                 break

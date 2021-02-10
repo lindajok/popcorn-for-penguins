@@ -2,6 +2,36 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from bs4 import BeautifulSoup
 import io
 import numpy as np
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
+
+
+def tokenize(documents):
+    """ Tokenizes the documents and returns a list """
+    tokenized = []
+
+    for article in documents:
+        tokens = word_tokenize(article)
+        tokenized.append(tokens)
+
+    return tokenized
+
+
+def stemming(tokenized):
+    """ Stems the documents and returns a list of stemmed strings """
+    porter = PorterStemmer()
+    stemmed = []
+    stem_document = ""
+
+    for article in tokenized:
+        for word in article:
+            word = porter.stem(word)
+            stem_document += word + " "
+
+        stemmed.append(stem_document)
+        stem_document = ""
+
+    return stemmed
 
 
 def title_list():
@@ -58,6 +88,19 @@ def print_results(user_input):
         else:
             print("The score of {} is {:.4f} in document {}: {:s}{:s}...".format(user_input, score, 
                 titles[i], cut[first_occurrence-50:first_occurrence], cut[first_occurrence:first_occurrence+50]))
+
+
+# ---------------------- New code here too -------------------------
+
+tokenize(prepare_data()) # calling the function tokenize
+stemming(tokenize(prepare_data())) # calling the function stemming
+
+# --> I really don't know what to do with them next ((⇀‸↼))
+# You can try to print these two functions with a smaller dataset so 
+# you know how the output looks like. Also this implementation is 
+# a bit slow.
+
+# -------------------------------------------------------------------
 
 
 def main():

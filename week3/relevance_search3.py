@@ -57,7 +57,7 @@ def prepare_data():
 def print_results(user_input):
     # documents = stemming(prepare_data())
     documents = prepare_data()
-    documents_copy = copy.copy(documents)
+    documents_copy = copy.deepcopy(documents)
     stemmed_documents = stemming(documents_copy) 
     user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
 

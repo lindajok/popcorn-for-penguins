@@ -67,7 +67,7 @@ def print_results(user_input):
 
     ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
     for score, i in ranked_scores_and_doc_ids:
-        print("The score of 'silly example' is {:.4f} in document: {:s}".format(score, documents[i][:50]))
+        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, documents[i][:50]))
 
 
 ######################################################################

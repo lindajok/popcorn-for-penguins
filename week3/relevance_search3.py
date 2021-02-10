@@ -8,24 +8,13 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 # from nltk.corpus import stopwords                         # in case we want to use stop words
 stemmer = PorterStemmer() # made it global
 
-def stemming(documents):
-    for i in range(len(documents)):
-        # toknize all the words in the documents
-        words = nltk.word_tokenize(documents[i])           
-        # stem all the words                                # if we want to use stop words, add code below:
-        words = [stemmer.stem(word) for word in words]      # if word not in set(stopwords.words('english'))]   
-        # join the stemmed word into sentences                      
-        documents[i] = ' '.join(words)
+def stemming(list):
+    for i in range(len(list)):
+        words = nltk.word_tokenize(list[i])                 # if we want to use stop words, add code below:
+        words = [stemmer.stem(word) for word in words]      # if word not in set(stopwords.words('english'))]                      
+        list[i] = ' '.join(words)
 
-    return documents
-
-
-def stemming_string(user_input):
-    user_input = nltk.word_tokenize(user_input)
-    user_input = [stemmer.stem(word) for word in user_input]
-    user_input = ' '.join([word for word in user_input])
-
-    return user_input
+    return list
 
 
 def title_list():
@@ -68,7 +57,8 @@ def prepare_data():
 def print_results(user_input):
     # documents = stemming(prepare_data())
     documents = prepare_data()
-    stemmed_documents = stemming(documents)
+    stemmed_documents = stemming(documents) 
+    user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
 
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms
@@ -122,7 +112,7 @@ def main():
     user_input = "0"
     while user_input != "":
         user_input = input("Write the query (press enter to stop): ").lower()
-        user_input = stemming_string(user_input)
+        user_input = stemming(user_input.split())
         try:
             if user_input == "":
                 break

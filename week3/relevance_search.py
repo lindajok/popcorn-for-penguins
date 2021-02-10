@@ -5,7 +5,7 @@ import numpy as np
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-
+'''
 def tokenize(documents):
     """ Tokenizes the documents and returns a list """
     tokenized = []
@@ -15,7 +15,6 @@ def tokenize(documents):
         tokenized.append(tokens)
 
     return tokenized
-
 
 def stemming(tokenized):
     """ Stems the documents and returns a list of stemmed strings """
@@ -32,7 +31,24 @@ def stemming(tokenized):
         stem_document = ""
 
     return stemmed
+'''
 
+def stemming(documents):
+    porter = PorterStemmer()
+    tokenized = []
+    stemmed = []
+    stem_document = ""
+    for article in documents:
+        tokens = word_tokenize(article)
+        tokenized.append(tokens)
+    for article in tokenized:
+        for word in article:
+            word = porter.stem(word)
+            stem_document += word + " "
+        stemmed.append(stem_document)
+        stem_document = ""
+
+    return stemmed
 
 def title_list():
     """ Read a file and make a list with titles of the document """
@@ -92,9 +108,8 @@ def print_results(user_input):
 
 # ---------------------- New code here too -------------------------
 
-tokenize(prepare_data()) # calling the function tokenize
-stemming(tokenize(prepare_data())) # calling the function stemming
-
+#tokenize(prepare_data()) # calling the function tokenize
+stemming(prepare_data()) # calling the function stemming --> stemming(tokenize(prepare_data)))
 # --> I really don't know what to do with them next ((⇀‸↼))
 # You can try to print these two functions with a smaller dataset so 
 # you know how the output looks like. Also this implementation is 

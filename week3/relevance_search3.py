@@ -6,13 +6,14 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 import copy
-# from nltk.corpus import stopwords                         # in case we want to use stop words
+from nltk.corpus import stopwords                        # in case we want to use stop words
 stemmer = PorterStemmer() # made it global
+
 
 def stemming(list):
     for i in range(len(list)):
-        words = nltk.word_tokenize(list[i])                 # if we want to use stop words, add code below:
-        words = [stemmer.stem(word) for word in words]      # if word not in set(stopwords.words('english'))]                      
+        words = nltk.word_tokenize(list[i])                # if we want to use stop words, add code below:
+        words = [stemmer.stem(word) for word in words]      # if word not in set(stopwords.words('english'))]                    
         list[i] = ' '.join(words)
 
     return list
@@ -55,23 +56,24 @@ def prepare_data():
 
 
 def print_results(user_input):
-    # documents = stemming(prepare_data())
-    documents = prepare_data()
-    documents_copy = copy.copy(documents)
-    stemmed_documents = stemming(documents_copy) 
-    user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
+    user_input_string = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
 
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms
-    query_vec5 = tfv5.transform([user_input]).tocsc()
+    query_vec5 = tfv5.transform([user_input_string]).tocsc()
     hits = np.dot(query_vec5, sparse_matrix)
 
     ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
     for score, i in ranked_scores_and_doc_ids:
-        first_occurrence = documents[i].find(user_input)
-        print("The score of {} is {:.4f} in document: {:s}".format(user_input, score, documents[i][first_occurrence:first_occurrence+50]))
+        first_occurrence = -1   
+        while first_occurrence == -1:   # the "find()" returns "-1" if no matches
+            for word in user_input:
+                first_occurrence = stemmed_documents[i].find(word)     
+        print("The score of {} is {:.4f} in document: {:s}".format(user_input_string, score, documents[i][:50]))           #[first_occurrence:first_occurrence+50]))
 
-
+documents = prepare_data()
+documents_copy = copy.deepcopy(documents)
+stemmed_documents = stemming(documents_copy) 
 ######################################################################
 ## Commented this for now because it doesn't work correctly and     ##
 ## makes it hard to evaluate if the actual code works properly -->  ##

@@ -30,7 +30,7 @@ Install Flask:
 pip install Flask
 ```
 
-You might have to also install:
+You might also have to install:
 ```
 pip install -U scikit-learn
 pip install nltk

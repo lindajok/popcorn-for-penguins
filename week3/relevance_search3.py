@@ -56,7 +56,15 @@ def prepare_data():
 
 
 def print_results(user_input):
+<<<<<<< HEAD
     user_input_string = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
+=======
+    # documents = stemming(prepare_data())
+    documents = prepare_data()
+    documents_copy = copy.deepcopy(documents)
+    stemmed_documents = stemming(documents_copy) 
+    user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
+>>>>>>> de7be0ef15b9bc2f99f1e08569acfb4d724d4916
 
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms

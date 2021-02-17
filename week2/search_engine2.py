@@ -1,20 +1,21 @@
 from sklearn.feature_extraction.text import CountVectorizer
-from bs4 import BeautifulSoup
 import io
+import re
 
 def prepare_data():
     """ Read a file and make a list of strings """
     documents = []
     article = ""
-    f = io.open("data100.txt", mode="r", encoding="utf-8" )                 # Change the name if you want to change the dataset 
+    f = io.open("data100.txt", mode="r", encoding="utf-8" )                 
     for line in f:
-        line = line.replace('\n', ' ')                                      # Replace newline characers with space
-        if line == "</article> ":                                           # Locate boundaries between articles
-                clean_version = BeautifulSoup(article, "html.parser").text  # Remove tags
-                documents.append(clean_version)                             # Add the article string without tags to the list of documents
-                article=""                                                  # Define "auxiliary" variable again
+        line = line.replace('\n', ' ')                                     
+        if line == "</article> ":                                           
+            clean = re.compile('<.*?>')
+            clean_version = re.sub(clean, '', article)
+            documents.append(clean_version)                             
+            article=""                                                  
         else:
-                article+=line                                                                        
+            article+=line                                                                        
     f.close()
     return documents
 

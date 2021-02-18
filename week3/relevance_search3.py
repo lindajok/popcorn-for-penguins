@@ -23,7 +23,7 @@ def title_list():
     """ Read a file and make a list with titles of the document """
     title_list = []
 
-    f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
+    f = io.open("data100.txt", mode="r", encoding="utf-8" )
     for line in f:
         line = line.replace('\n', '')
         if "<article name=" in line:
@@ -39,7 +39,7 @@ def prepare_data():
     """ Read a file and make a list of strings """
     documents = []
     article = ""
-    f = io.open("gutenberg.txt", mode="r", encoding="utf-8" )
+    f = io.open("data100.txt", mode="r", encoding="utf-8" )
 
     for line in f:
         line = line.replace('\n', ' ')
@@ -56,16 +56,8 @@ def prepare_data():
 
 
 def print_results(user_input):
-<<<<<<< HEAD
-    user_input_string = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
-=======
-    # documents = stemming(prepare_data())
-    documents = prepare_data()
-    documents_copy = copy.deepcopy(documents)
-    stemmed_documents = stemming(documents_copy) 
+    user_input_string = ' '.join([str(elem) for elem in user_input])  # make the input into a string again 
     user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
->>>>>>> de7be0ef15b9bc2f99f1e08569acfb4d724d4916
-
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2")
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms
     query_vec5 = tfv5.transform([user_input_string]).tocsc()

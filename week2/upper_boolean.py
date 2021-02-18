@@ -52,7 +52,7 @@ def print_results(user_input):
 
         for i, doc_idx in enumerate(hits_list):
             if i > 4:
-                breakd
+                break
             else:
                 print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
     except:

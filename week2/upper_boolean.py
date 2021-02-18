@@ -23,7 +23,7 @@ def prepare_data():
     f.close()
     return documents
 
-documents = prepare_data() # Documents in a list of strings format, left as a global variable
+documents = prepare_data() 
 
 
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
@@ -40,10 +40,14 @@ def rewrite_token(t):
      "OR": "|",
      "NOT": "1 -",
      "(": "(", ")": ")"}
-    if t in terms or t in d:
-        return d.get(t, 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t)) # Make retrieved rows dense
+
+    if t in d:
+        return d.get(t) 
+    elif t.lower() in terms:
+        return 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t.lower())
     else:
         return 'np.matrix(np.zeros(len(documents), dtype=int))'
+
 
 def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
@@ -61,7 +65,7 @@ def print_results(user_input):
             else:
                 print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
     except:
-        print("Wrong syntax. Check that you use uppercase boolean values (AND, OR, NOT)")
+        print("Wrong syntax. Please check that you use uppercase boolean operators (AND, OR, NOT)")
 
 
 def main():

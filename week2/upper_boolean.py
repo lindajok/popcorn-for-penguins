@@ -29,13 +29,17 @@ dense_matrix = sparse_matrix.todense()
 td_matrix = dense_matrix.T
 sparse_td_matrix = sparse_matrix.T.tocsr()
 t2i = cv.vocabulary_ # dictionary of terms
+terms = cv.get_feature_names()
 
 def rewrite_token(t):
     d = {"AND": "&",
      "OR": "|",
      "NOT": "1 -",
      "(": "(", ")": ")"}
-    return d.get(t, 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t)) # Make retrieved rows dense
+    if t in terms or t in d:
+        return d.get(t, 'sparse_td_matrix[t2i["{:s}"]].todense()'.format(t)) # Make retrieved rows dense
+    else:
+        return 'np.matrix(np.zeros(len(documents), dtype=int))'
 
 def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())

@@ -45,14 +45,18 @@ def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
 def print_results(user_input):
-    hits_matrix = eval(rewrite_query(user_input))
-    hits_list = list(hits_matrix.nonzero()[1])
-    print("Total number of matching documents: {:d}".format(len(hits_list)))
-    for i, doc_idx in enumerate(hits_list):
-        if i > 4:
-            break
-        else:
-            print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
+    try:
+        hits_matrix = eval(rewrite_query(user_input))
+        hits_list = list(hits_matrix.nonzero()[1])
+        print("Total number of matching documents: {:d}".format(len(hits_list)))
+
+        for i, doc_idx in enumerate(hits_list):
+            if i > 4:
+                breakd
+            else:
+                print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
+    except:
+        print("Wrong syntax. Check that you use uppercase boolean values (AND, OR, NOT)")
 
 def main():
     user_input = "0"

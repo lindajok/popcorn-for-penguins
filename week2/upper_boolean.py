@@ -3,6 +3,8 @@
 from sklearn.feature_extraction.text import CountVectorizer
 import io
 import re
+import numpy as np
+
 
 def prepare_data():
     """ Read a file and make a list of strings """
@@ -23,6 +25,7 @@ def prepare_data():
 
 documents = prepare_data() # Documents in a list of strings format, left as a global variable
 
+
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()
@@ -30,6 +33,7 @@ td_matrix = dense_matrix.T
 sparse_td_matrix = sparse_matrix.T.tocsr()
 t2i = cv.vocabulary_ # dictionary of terms
 terms = cv.get_feature_names()
+
 
 def rewrite_token(t):
     d = {"AND": "&",
@@ -44,6 +48,7 @@ def rewrite_token(t):
 def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
+
 def print_results(user_input):
     try:
         hits_matrix = eval(rewrite_query(user_input))
@@ -57,6 +62,7 @@ def print_results(user_input):
                 print("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
     except:
         print("Wrong syntax. Check that you use uppercase boolean values (AND, OR, NOT)")
+
 
 def main():
     user_input = "0"

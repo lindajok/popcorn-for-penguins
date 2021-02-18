@@ -16,7 +16,7 @@ def prepare_data():
     """ Read a file and make a list of strings """
     documents = []
     article = ""
-    f = io.open("data100.txt", mode="r", encoding="utf-8")
+    f = io.open("static/data100.txt", mode="r", encoding="utf-8")
     for line in f:
         line = line.replace('\n', ' ')
         if line == "</article> ":

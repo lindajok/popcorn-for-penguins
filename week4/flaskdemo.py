@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import io
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from bs4 import BeautifulSoup
+import re
 import numpy as np
 import nltk
 from nltk.stem import PorterStemmer
@@ -16,19 +16,17 @@ def prepare_data():
     """ Read a file and make a list of strings """
     documents = []
     article = ""
-    f = io.open("static/data100.txt", mode="r", encoding="utf-8" )
-
+    f = io.open("data100.txt", mode="r", encoding="utf-8")
     for line in f:
         line = line.replace('\n', ' ')
         if line == "</article> ":
-                clean_version = BeautifulSoup(article, "html.parser").text
-                documents.append(clean_version)
-                article=""
+            clean = re.compile('<.*?>')
+            clean_version = re.sub(clean, '', article)
+            documents.append(clean_version)
+            article=""
         else:
-                article+=line
-
+            article+=line
     f.close()
-
     return documents
 
 documents = prepare_data()

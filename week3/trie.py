@@ -1,4 +1,7 @@
 # https://www.riff.ie/2020/02/05/wildcard-searching-trie.html
+# https://github.com/TeodorDyakov/wildcard-trie/blob/master/src/trie/Trie.java
+# https://gist.github.com/shehabic/5a004258793d7cf8cfa0ca15ffebb6a1
+
 from typing import Dict, List, Any
 
 WILDCARD = '?'

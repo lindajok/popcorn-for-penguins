@@ -131,7 +131,7 @@ def print_results(user_input):
 
 
 def main():
-    print("Search for multi-phrase words INSIDE QUOTATIONS and WITHOUT spaces, e.g. \"newyork\".")
+    print("Search for multi-word phrases INSIDE QUOTATIONS and WITHOUT spaces, e.g. \"newyork\".")
     print("Use UPPERCASED boolean operators, e.g. new AND york, new OR york, new NOT york")
     user_input = "0"
     while user_input != "":

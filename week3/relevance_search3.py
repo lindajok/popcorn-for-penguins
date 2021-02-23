@@ -121,7 +121,7 @@ def main():
             if user_input == "":
                 break
             else:
-		user_input = stemming(user_input.split())
+                user_input = stemming(user_input.split())
                 print_results(user_input)
         except KeyError:
             print("Bad query")

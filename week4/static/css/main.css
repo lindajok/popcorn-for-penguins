@@ -1,1 +1,12 @@
 /* Add css style here */
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

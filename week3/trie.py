@@ -3,8 +3,7 @@
 # https://gist.github.com/shehabic/5a004258793d7cf8cfa0ca15ffebb6a1
 
 from typing import Dict, List, Any
-
-WILDCARD = '?'
+from bs4 import BeautifulSoup
 
 class Trie:
     def __init__(self):
@@ -22,6 +21,7 @@ class Trie:
     def find(self, word: str) -> bool:
         stack = [(self, 0, '')]
         result = []
+        wildcard = '?'
 
         while stack:
             curr, count, currWord = stack.pop()
@@ -31,7 +31,7 @@ class Trie:
                 continue
 
             currChar = word[count]
-            if currChar == WILDCARD:
+            if currChar == wildcard:
                 for childChar, node in curr.children.items():
                     stack.append((node, count + 1, currWord + childChar))
                 continue

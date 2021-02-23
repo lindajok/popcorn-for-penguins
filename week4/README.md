@@ -42,7 +42,7 @@ Set the following environment variables:
 Show flask which file to run:
 
 ```
-export FLASK_APP=flaskdemo.py
+export FLASK_APP=search_engine.py
 ```
 
 Enable development environment to activate interactive debugger and reloader:
@@ -60,7 +60,7 @@ export FLASK_RUN_PORT=8000
 On Windows command line, you can the environment variables with:
 
 ```
-set FLASK_APP=flaskdemo.py
+set FLASK_APP=search_engine.py
 set FLASK_ENV=development
 set FLASK_RUN_PORT=8000
 ```
@@ -68,7 +68,7 @@ set FLASK_RUN_PORT=8000
 And on Windows PowerShell:
 
 ```
-$env:FLASK_APP = "flaskdemo.py"
+$env:FLASK_APP = "search_engine.py"
 $env:FLASK_ENV = "development"
 $env:FLASK_RUN_PORT = "8000"
 ```

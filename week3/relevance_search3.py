@@ -58,7 +58,6 @@ def prepare_data():
 def print_results(user_input):
     user_input_string = ' '.join([str(elem) for elem in user_input])  # make the input into a string again 
     user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
-    print("user_input", user_input)
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms

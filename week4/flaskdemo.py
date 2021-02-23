@@ -58,13 +58,10 @@ def rewrite_query(query): # rewrite every token in the query
 
 def print_results(user_input):
     matches = []
-    try:
-        hits_matrix = eval(rewrite_query(user_input))
-        hits_list = list(hits_matrix.nonzero()[1])
-        for i, doc_idx in enumerate(hits_list):
-            matches.append("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))
-    except:
-        matches.append("No documents found")
+    hits_matrix = eval(rewrite_query(user_input))
+    hits_list = list(hits_matrix.nonzero()[1])
+    for i, doc_idx in enumerate(hits_list):
+        matches.append("Example of a matching doc #{:d}: {:s}...".format(i, documents[doc_idx][:50]))    
     return matches
 
 

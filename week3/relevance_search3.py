@@ -63,15 +63,16 @@ def print_results(user_input):
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms
     query_vec5 = tfv5.transform([user_input_string]).tocsc()
     hits = np.dot(query_vec5, sparse_matrix)
-
-    ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
-    for score, i in ranked_scores_and_doc_ids:
-        first_occurrence = -1   
-        while first_occurrence == -1:   # the "find()" returns "-1" if no matches
-            for word in user_input:
-                first_occurrence = stemmed_documents[i].find(word)     
-        print("The score of {} is {:.4f} in document: {:s}".format(user_input_string, score, documents[i][:50]))           #[first_occurrence:first_occurrence+50]))
-
+    try:
+        ranked_scores_and_doc_ids = sorted(zip(np.array(hits[hits.nonzero()])[0], hits.nonzero()[1]), reverse=True)
+        for score, i in ranked_scores_and_doc_ids:
+            first_occurrence = -1   
+            while first_occurrence == -1:   # the "find()" returns "-1" if no matches
+                for word in user_input:
+                    first_occurrence = stemmed_documents[i].find(word)     
+            print("The score of {} is {:.4f} in document: {:s}".format(user_input_string, score, documents[i][:50]))           #[first_occurrence:first_occurrence+50]))
+    except:
+        print("{} not found. ".format(user_input_string))
 documents = prepare_data()
 documents_copy = copy.deepcopy(documents)
 stemmed_documents = stemming(documents_copy) 

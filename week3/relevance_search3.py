@@ -60,6 +60,7 @@ def print_results(user_input):
     user_input = ' '.join([str(elem) for elem in user_input])  # make the input into a string again
     print("user_input", user_input)
     tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
+
     sparse_matrix = tfv5.fit_transform(stemmed_documents).T.tocsr() # CSR: compressed sparse row format => order by terms
     query_vec5 = tfv5.transform([user_input_string]).tocsc()
     hits = np.dot(query_vec5, sparse_matrix)
@@ -116,11 +117,11 @@ def main():
     user_input = "0"
     while user_input != "":
         user_input = input("Write the query (press enter to stop): ").lower()
-        user_input = stemming(user_input.split())
         try:
             if user_input == "":
                 break
             else:
+		user_input = stemming(user_input.split())
                 print_results(user_input)
         except KeyError:
             print("Bad query")

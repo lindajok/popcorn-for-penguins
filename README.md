@@ -14,3 +14,4 @@ Goal and purpose of the project: Yet to be determined!
 2. Install Flask if not there: pip3 install Flask
 3. Setup: export FLASK_APP=search_engine.py, export FLASK_ENV=development, export FLASK_RUN_PORT=8000
 4. Run: flask run
+5. Open: http://127.0.0.1:8000/search

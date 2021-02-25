@@ -52,3 +52,10 @@ flask run
 ```
 
 Go to `localhost:8000/search` in your browser to see the website.
+
+To leave the virtual environment:
+
+```
+deactivate
+```
+

@@ -3,26 +3,51 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Search Engine</title>
+    <title>TOMATO</title>
   </head>
+
   <body>
-    <h1>Find documents</h1>
-    <!--Reload the page with variable "query" in the URL-->
-    <form>
-      <input type="text" name="query" autofocus>
-      <input type="submit" value="Search">
-    </form>
-    <table class = "center">
-    <!--Go through each item in the "matches" variable sent from
-        search() function in the Flask app-->
-        {% for item in matches %}
-        <tr>
-        <!--Display the name of the item based on the "name" key-->
-            <td>{{ item | truncate(150) }}</td>
-            <!--Display the image of the item based on the "source" key-->
-        </tr>
-        <!--End for loop-->
-       {% endfor %}
-    </table>
+    <!-- The top part of the page -->
+    <div class="header">
+      <h1>PFP document finder</h1>
+      <p>Happy {{ day }}!</p>
+    </div>
+
+    <!-- The search bar section -->
+    <div class="search nav">
+          <p>Search for something</p>
+          <form>
+            <select name="mealtype">
+              {% for meal in mealtypes %}
+                  <option value="{{ meal }}">{{ meal }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" name="query" autofocus>
+            <button type="submit" value="Search">Search</button>
+          </form>
+      </div>
+    
+    <!-- The returned document section ("main" section of our page) -->
+      <div class="main">
+          <table class="search results">
+            <!-- Title of the table -->
+            <thead>     
+              <caption><h3>Search results: </h3></caption>
+            </thead>
+              {% for article in matches %}
+                {% for title, contents in article.items() %}
+                <!-- First row is the title -->
+                <tr>
+                  <td><h2><u>{{ title }}</u></h2></td>
+                </tr>
+                <!-- Second row is the contents (with truncate you can change the amount od characters showing) -->
+                <tr>
+                    <td>{{ contents | truncate(700) }}</td>
+                </tr>
+                {% endfor %}
+              {% endfor %}
+          </table>
+      </div>
+
   </body>
 </html>

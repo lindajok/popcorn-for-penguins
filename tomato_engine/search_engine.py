@@ -3,15 +3,14 @@ import io
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import re
 import numpy as np
-
+from datetime import datetime
 # from nltk.stem import PorterStemmer
 # from nltk.tokenize import sent_tokenize, word_tokenize
 # import copy
 
-from datetime import datetime
-
 #Initialize Flask instance
 app = Flask(__name__)
+
 
 def prepare_data():
     """ Read a file and make a list of strings """
@@ -29,8 +28,8 @@ def prepare_data():
     f.close()
     return documents
 
-documents = prepare_data()
 
+documents = prepare_data()
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()

@@ -1,31 +1,19 @@
 ## Flask commands
 
-And a virtual environment `tomato`:
-
-```
-python3 -m venv tomato
-```
-
-Activate the environment:
+The virtual environment `tomato` is already installed (see folder tomato), you just have to activate the environment:
 
 ```
 . tomato/bin/activate
 ```
 
-Install Flask:
+This environment has following libraries installed:
 
-```
-pip install Flask
-```
+- Flask
+- SciKit
+- NLTK
+- BeautifulSoup
 
-You might also have to install:
-```
-pip install -U scikit-learn
-pip install nltk
-pip install beautifulsoup4
-```
-
-Set the following environment variables:
+### Set the following environment variables:
 
 Show flask which file to run:
 

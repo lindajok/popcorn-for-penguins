@@ -1,15 +1,15 @@
 ## Flask commands
 
-And a virtual environment `demoenv`:
+And a virtual environment `tomato`:
 
 ```
-python3 -m venv demoenv
+python3 -m venv tomato
 ```
 
 Activate the environment:
 
 ```
-. demoenv/bin/activate
+. tomato/bin/activate
 ```
 
 Install Flask:

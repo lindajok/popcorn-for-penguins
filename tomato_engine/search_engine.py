@@ -4,9 +4,10 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import re
 import numpy as np
 from datetime import datetime
-# from nltk.stem import PorterStemmer
+from copy import deepcopy
+from nltk.stem import PorterStemmer
+import nltk
 # from nltk.tokenize import sent_tokenize, word_tokenize
-# import copy
 
 #Initialize Flask instance
 app = Flask(__name__)
@@ -29,13 +30,26 @@ def prepare_data():
     return documents
 
 
+def stem(list):
+    stemmer = PorterStemmer() 
+    for i in range(len(list)):
+        words = nltk.word_tokenize(list[i]) 
+        words = [stemmer.stem(word) for word in words]                        
+        list[i] = ' '.join(words)
+    return list
+
+
+# Documents:
 documents = prepare_data()
+copy_documents = deepcopy(documents)
+stemmed_documents = (stem(copy_documents))
+
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
-sparse_matrix = cv.fit_transform(documents)
+sparse_matrix = cv.fit_transform(stemmed_documents)
 dense_matrix = sparse_matrix.todense()
 td_matrix = dense_matrix.T
 sparse_td_matrix = sparse_matrix.T.tocsr()
-t2i = cv.vocabulary_ # dictionary of terms
+t2i = cv.vocabulary_ 
 terms = cv.get_feature_names()
 
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
@@ -55,7 +69,7 @@ def rewrite_token(t):
         return 'np.matrix(np.zeros(len(documents), dtype=int))'
 
 
-def rewrite_query(query): # rewrite every token in the query
+def rewrite_query(query):
     return " ".join(rewrite_token(t) for t in query.split())
 
 

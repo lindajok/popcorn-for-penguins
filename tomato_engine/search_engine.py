@@ -9,6 +9,7 @@ import nltk
 from copy import deepcopy
 # from nltk.tokenize import sent_tokenize, word_tokenize
 
+stemmer = PorterStemmer()
 #Initialize Flask instance
 app = Flask(__name__)
 
@@ -30,8 +31,7 @@ def prepare_data():
     return documents
 
 
-def stem(list):
-    stemmer = PorterStemmer() 
+def stem(list): 
     for i in range(len(list)):
         words = nltk.word_tokenize(list[i]) 
         words = [stemmer.stem(word) for word in words]                        
@@ -53,6 +53,15 @@ terms = cv.get_feature_names()
 
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
+
+
+def stem_query(query):
+    boolean = ["AND", "OR", "NOT", "(", ")"]
+    for word in query.split():
+        if word not in boolean:
+            stemmed = stemmer.stem(word)
+            query = re.sub(word, stemmed, query)
+    return query
 
 
 def rewrite_token(t):
@@ -94,7 +103,6 @@ def format(hits):
 
 
 def get_matches(user_input):
-    user_input = ' '.join([str(elem) for elem in user_input])
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
     return format(hits_list)
@@ -110,13 +118,13 @@ def search():
 
     #Get query from URL variable
     query = request.args.get('query')
-    query = stem(query.split())
 
     #Initialize list of matches
     matches = []
 
     #If query exists (i.e. is not None)
     if query:
+        query = stem_query(query)
         matches = get_matches(query)
 
     #Render index.html with matches variable

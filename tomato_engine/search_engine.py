@@ -72,11 +72,11 @@ def get_title(doc_idx):
 def format(hits):
     recipes = []
     recipe = {}
-    for i, doc_idx in enumerate(hits_list):
+    for i, doc_idx in enumerate(hits):
         title = get_title(doc_idx)
         content = get_content(doc_idx)
-        recipes[title]=content
-        recipes.append(dict)  
+        recipe[title]=content
+        recipes.append(recipe)  
     return recipes
 
 

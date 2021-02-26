@@ -6,11 +6,6 @@ The virtual environment `tomato` is already installed (see folder tomato), you j
 . tomato/bin/activate
 ```
 
-Install Flask:
-```
-pip install Flask
-```
-
 This environment has following libraries installed:
 
 - Flask

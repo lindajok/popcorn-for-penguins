@@ -4,9 +4,9 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import re
 import numpy as np
 from datetime import datetime
-from copy import deepcopy
 from nltk.stem import PorterStemmer
 import nltk
+from copy import deepcopy
 # from nltk.tokenize import sent_tokenize, word_tokenize
 
 #Initialize Flask instance
@@ -38,13 +38,12 @@ def stem(list):
         list[i] = ' '.join(words)
     return list
 
-
-# Documents:
 documents = prepare_data()
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
 
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
+
 sparse_matrix = cv.fit_transform(stemmed_documents)
 dense_matrix = sparse_matrix.todense()
 td_matrix = dense_matrix.T
@@ -69,7 +68,7 @@ def rewrite_token(t):
         return 'np.matrix(np.zeros(len(documents), dtype=int))'
 
 
-def rewrite_query(query):
+def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
 
@@ -95,6 +94,7 @@ def format(hits):
 
 
 def get_matches(user_input):
+    user_input = ' '.join([str(elem) for elem in user_input])
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
     return format(hits_list)
@@ -110,6 +110,7 @@ def search():
 
     #Get query from URL variable
     query = request.args.get('query')
+    query = stem(query.split())
 
     #Initialize list of matches
     matches = []

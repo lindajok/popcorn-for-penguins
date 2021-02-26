@@ -59,18 +59,31 @@ def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
 
-def format(user_input):
-    matches = []
-    dict = {}
+def get_content(doc_idx):
+    return re.sub('<.*?>', '', documents[doc_idx])
+    
+    
+def get_title(doc_idx):
+    title = re.sub(r'<article name="', '', documents[doc_idx])
+    title = re.sub('">.*', '', title)
+    return title
+
+
+def format(hits):
+    recipes = []
+    recipe = {}
+    for i, doc_idx in enumerate(hits_list):
+        title = get_title(doc_idx)
+        content = get_content(doc_idx)
+        recipes[title]=content
+        recipes.append(dict)  
+    return recipes
+
+
+def get_matches(user_input):
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
-    for i, doc_idx in enumerate(hits_list):
-        title = re.sub(r'<article name="', '', documents[doc_idx])
-        title = re.sub('">.*', '', title)
-        content = re.sub('<.*?>', '', documents[doc_idx])
-        dict[title]=content
-        matches.append(dict)  
-    return matches
+    return format(hits_list)
 
 
 #Function search() is associated with the address base URL + "/search"
@@ -89,7 +102,7 @@ def search():
 
     #If query exists (i.e. is not None)
     if query:
-        matches = format(query)
+        matches = get_matches(query)
 
     #Render index.html with matches variable
     return render_template('index.html', matches=matches, day=day_name, mealtypes=mealtypes)

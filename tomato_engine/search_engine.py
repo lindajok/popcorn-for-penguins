@@ -8,11 +8,11 @@ from nltk.stem import PorterStemmer
 import nltk
 from copy import deepcopy
 # from nltk.tokenize import sent_tokenize, word_tokenize
+import csv
 
 stemmer = PorterStemmer()
 #Initialize Flask instance
 app = Flask(__name__)
-
 
 def prepare_data():
     """ Read a file and make a list of strings """

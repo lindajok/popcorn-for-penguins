@@ -8,17 +8,11 @@ from nltk.stem import PorterStemmer
 import nltk
 from copy import deepcopy
 # from nltk.tokenize import sent_tokenize, word_tokenize
-from ast import literal_eval # handle the imported recipe file as list
 
 stemmer = PorterStemmer()
 #Initialize Flask instance
 app = Flask(__name__)
 
-def prep():
-    """ Read the recipes file and make a list of lists """
-    with open('static/tomato_recipes.txt') as recipes:
-        recipes_lst = [list(literal_eval(line)) for line in recipes]
-        return recipes_lst
 
 def prepare_data():
     """ Read a file and make a list of strings """

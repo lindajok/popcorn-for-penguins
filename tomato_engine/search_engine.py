@@ -8,39 +8,49 @@ from nltk.stem import PorterStemmer
 import nltk
 from copy import deepcopy
 # from nltk.tokenize import sent_tokenize, word_tokenize
-from ast import literal_eval # handle the imported recipe file as list
-
 stemmer = PorterStemmer()
+
 #Initialize Flask instance
 app = Flask(__name__)
 
-def prepare_recipes():
-    """ Read the recipes file and make a list of lists """
-    with open('static/tomato_recipes.txt') as recipes:
-        recipes_lst = [list(literal_eval(line)) for line in recipes]
-        return recipes_lst
+def titles():
+    f = io.open('static/titles.txt', mode='r', encoding='UTF-8')
+    for line in f:
+        line = line.split('*')
+    f.close()
+    return line
 
-def stem(lst):
-    """ Perform stemming of all recipes """
-    for i in range(len(lst)): # for all the recipes
-        for j in range(len(lst[i])): # for all the three parts of a recipe
-            if j == 0: # if the part is not a name of a recipe
-                words = nltk.word_tokenize(lst[i][j])
-                words = [stemmer.stem(word) for word in words]
-                lst[i][j] = ' '.join(words)
-            else:
-                for part in range(len(lst[i][j])): # for ingredients and a method
-                    words = nltk.word_tokenize(lst[i][j][part])
-                    words = [stemmer.stem(word) for word in words]
-                    lst[i][j][part] = ' '.join(words)
+
+def ingredients():
+    f = io.open('static/ingredients.txt', mode='r', encoding='UTF-8')
+    for line in f:
+        line = line.split('@')
+    f.close()
+    return line
+
+
+def methods():
+    f = io.open('static/methods.txt', mode='r', encoding='UTF-8')
+    for line in f:
+        line = line.split('@')
+    f.close()
+    return line
+
+
+def stem(lst): 
+    for i in range(len(lst)):
+        words = nltk.word_tokenize(lst[i]) 
+        words = [stemmer.stem(word) for word in words]                        
+        lst[i] = ' '.join(words)
     return lst
 
+
 documents = prepare_recipes()
+ingredients(documents)
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
 
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
-
 sparse_matrix = cv.fit_transform(stemmed_documents)
 dense_matrix = sparse_matrix.todense()
 td_matrix = dense_matrix.T

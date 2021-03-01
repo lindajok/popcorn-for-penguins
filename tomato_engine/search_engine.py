@@ -14,37 +14,28 @@ stemmer = PorterStemmer()
 #Initialize Flask instance
 app = Flask(__name__)
 
-def prep():
+def prepare_recipes():
     """ Read the recipes file and make a list of lists """
     with open('static/tomato_recipes.txt') as recipes:
         recipes_lst = [list(literal_eval(line)) for line in recipes]
         return recipes_lst
 
-def prepare_data():
-    """ Read a file and make a list of strings """
-    documents = []
-    article = ""
-    f = io.open("static/data100.txt", mode="r", encoding="utf-8")
-    for line in f:
-        line = line.replace('\n', ' ')
-        if line == "</article> ":
-            clean_version = re.sub("</article>", '', article)
-            documents.append(clean_version)
-            article=""
-        else:
-            article+=line
-    f.close()
-    return documents
+def stem(lst):
+    """ Perform stemming of all recipes """
+    for i in range(len(lst)): # for all the recipes
+        for j in range(len(lst[i])): # for all the three parts of a recipe
+            if j == 0: # if the part is not a name of a recipe
+                words = nltk.word_tokenize(lst[i][j])
+                words = [stemmer.stem(word) for word in words]
+                lst[i][j] = ' '.join(words)
+            else:
+                for part in range(len(lst[i][j])): # for ingredients and a method
+                    words = nltk.word_tokenize(lst[i][j][part])
+                    words = [stemmer.stem(word) for word in words]
+                    lst[i][j][part] = ' '.join(words)
+    return lst
 
-
-def stem(list): 
-    for i in range(len(list)):
-        words = nltk.word_tokenize(list[i]) 
-        words = [stemmer.stem(word) for word in words]                        
-        list[i] = ' '.join(words)
-    return list
-
-documents = prepare_data()
+documents = prepare_recipes()
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
 

@@ -97,7 +97,7 @@ def get_title(doc_idx):
     return title
 
 
-def format(hits):
+def style(hits):
     recipes = []
     recipe = {}
     for i, doc_idx in enumerate(hits):
@@ -111,7 +111,7 @@ def format(hits):
 def get_matches(user_input):
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
-    return format(hits_list)
+    return style(hits_list)
 
 
 #Function search() is associated with the address base URL + "/search"

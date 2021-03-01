@@ -13,6 +13,7 @@ stemmer = PorterStemmer()
 #Initialize Flask instance
 app = Flask(__name__)
 
+
 def titles():
     f = io.open('static/titles.txt', mode='r', encoding='UTF-8')
     for line in f:
@@ -45,8 +46,7 @@ def stem(lst):
     return lst
 
 
-documents = prepare_recipes()
-ingredients(documents)
+documents = ingredients()
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
 
@@ -60,7 +60,6 @@ terms = cv.get_feature_names()
 
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
-
 
 def stem_query(query):
     boolean = ["AND", "OR", "NOT", "(", ")"]

@@ -14,7 +14,7 @@ stemmer = PorterStemmer()
 app = Flask(__name__)
 
 
-def titles():
+def get_titles():
     f = io.open('static/titles.txt', mode='r', encoding='UTF-8')
     for line in f:
         line = line.split('*')
@@ -22,7 +22,7 @@ def titles():
     return line
 
 
-def ingredients():
+def get_ingredients():
     f = io.open('static/ingredients.txt', mode='r', encoding='UTF-8')
     for line in f:
         line = line.split('@')
@@ -46,7 +46,9 @@ def stem(lst):
     return lst
 
 
-documents = ingredients()
+titles = get_titles()
+ingredients = get_ingredients()
+documents = methods()
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
 
@@ -60,6 +62,7 @@ terms = cv.get_feature_names()
 
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
+
 
 def stem_query(query):
     boolean = ["AND", "OR", "NOT", "(", ")"]
@@ -87,22 +90,14 @@ def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
 
-def get_content(doc_idx):
-    return re.sub('<.*?>', '', documents[doc_idx])
-    
-    
-def get_title(doc_idx):
-    title = re.sub(r'<article name="', '', documents[doc_idx])
-    title = re.sub('">.*', '', title)
-    return title
-
-
 def style(hits):
     recipes = []
     recipe = {}
     for i, doc_idx in enumerate(hits):
-        title = get_title(doc_idx)
-        content = get_content(doc_idx)
+        content = []
+        title = titles[doc_idx]
+        content.append(ingredients[doc_idx])
+        content.append(documents[doc_idx])
         recipe[title]=content
         recipes.append(recipe)  
     return recipes

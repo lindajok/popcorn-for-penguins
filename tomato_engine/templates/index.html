@@ -107,9 +107,15 @@
          <thead>     
           <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
         </thead>
+<<<<<<< HEAD
 	{% if matches|length %}
 	<table class="search results">
 	  <!-- Title of the table -->
+=======
+        {% if matches|length %} 
+        <table class="search results">
+          <!-- Title of the table -->
+>>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea
           {% for title, contents in matches.items() %}
             <!-- First row is the title -->
             <tr>
@@ -139,5 +145,9 @@
       </table>
   </div>
 
+<<<<<<< HEAD
 </body>
 </html>
+=======
+</body>
+>>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea

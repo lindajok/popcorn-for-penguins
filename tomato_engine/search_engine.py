@@ -69,6 +69,7 @@ def stem_query(query):
     for word in query.split():
         if word not in boolean:
             stemmed = stemmer.stem(word)
+            print(stemmed)
             query = re.sub(word, stemmed, query)
     return query
 
@@ -91,16 +92,14 @@ def rewrite_query(query): # rewrite every token in the query
 
 
 def style(hits):
-    recipes = []
     recipe = {}
-    for i, doc_idx in enumerate(hits):
+    for doc_idx in hits:
         content = []
         title = titles[doc_idx]
-        content.append(ingredients[doc_idx])
-        content.append(documents[doc_idx])
+        content.append(ingredients[doc_idx].split("*"))
+        content.append(documents[doc_idx].split("*"))
         recipe[title]=content
-        recipes.append(recipe)  
-    return recipes
+    return recipe
 
 
 def get_matches(user_input):

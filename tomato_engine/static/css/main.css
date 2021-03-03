@@ -12,14 +12,14 @@ input {
 .header {
   padding: 50px;
   text-align: center;
-  background: #DarkOrange;
+  background: tomato;
   color: white;
   font-size: 30px;
 }
 .results {
   text-align: left;
 }
-caption {
+.caption {
   text-align: left;
 }
 .main {

@@ -29,26 +29,34 @@
       </div>
     
     <!-- The returned document section ("main" section of our page) -->
-      <div class="main">
-          <table class="search results">
-            <!-- Title of the table -->
-            <thead>     
-              <caption><h3>Search results: </h3></caption>
-            </thead>
-              {% for article in matches %}
-                {% for title, contents in article.items() %}
-                <!-- First row is the title -->
-                <tr>
-                  <td><h2><u>{{ title }}</u></h2></td>
-                </tr>
-                <!-- Second row is the contents (with truncate you can change the amount od characters showing) -->
-                <tr>
-                    <td>{{ contents | truncate(700) }}</td>
-                </tr>
-                {% endfor %}
-              {% endfor %}
-          </table>
-      </div>
+    <div class="main">
+      <table class="search results">
+        <!-- Title of the table -->
+        <thead>     
+          <div class="caption"><h3>Search results: </h3></div>
+        </thead>
+          {% for title, contents in matches.items() %}
+            <!-- First row is the title -->
+            <tr>
+              <td><h2><u>{{ title }}</u></h2></td>
+            </tr>
+            <!-- Second row is the contents (with truncate you can change the amount od characters showing) -->
+            {% for ingredient in contents[0] %}
+            <tr>
+              <td><i>{{ ingredient }}</i></td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td></td>
+            </tr>
+            {% for method in contents[1] %}
+            <tr>
+                <td>{{ method | truncate(700) }}</td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+      </table>
+  </div>
 
-  </body>
+</body>
 </html>

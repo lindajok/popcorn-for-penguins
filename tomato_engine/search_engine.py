@@ -123,9 +123,11 @@ def search():
     matches = []
 
     #If query exists (i.e. is not None)
-    if query:
-        query = stem_query(query)
-        matches = get_matches(query)
-
+    try:
+        if query:
+            stemmed_query = stem_query(query)
+            matches = get_matches(stemmed_query)
+    except:
+        matches = {}
     #Render index.html with matches variable
-    return render_template('index.html', matches=matches, day=day_name, mealtypes=mealtypes)
+    return render_template('index.html', matches=matches, day=day_name, mealtypes=mealtypes, original_query=query)

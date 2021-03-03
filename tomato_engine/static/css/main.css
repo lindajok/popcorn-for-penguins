@@ -25,6 +25,9 @@ input {
 .main {
   padding: 60px;
 }
+.tomato {
+  font-size: 100px;
+}
 h2 {
   color: #1abc9c;
   font-size: 20px;

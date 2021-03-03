@@ -1,5 +1,5 @@
 body, html {
-  margin: 0;
+  margin: 20;
   font-family: sans-serif;
   text-align: center;
 }
@@ -12,8 +12,8 @@ input {
 .header {
   padding: 50px;
   text-align: center;
-  background: tomato;
-  color: white;
+  background: white;
+  color: tomato;
   font-size: 30px;
 }
 .results {

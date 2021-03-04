@@ -66,6 +66,11 @@
   <body>
     <!-- The top part of the page -->
     <div class="header">
+      {% if matches|length %}
+      <img src="../static/pingu2_transparent.png" width="150px">
+      {% else %}
+      <img src="../static/pingu1_transparent.png" width="150px">
+      {% endif %}
       <br>
       <br>
       <br>
@@ -94,12 +99,6 @@
     <button type="submit" value="Search">Search</button>
     </form>
     </div!-->
-
-    {% if matches|length %}
-    <img src="../static/pingu2_transparent.png" width="260px" height="370px">
-    {% else %}
-    <img src="../static/pingu1_transparent.png" width="260px" height="370px">
-    {% endif %}
 
     <!-- The returned document section ("main" section of our page) -->
     <div class="main">

@@ -1,0 +1,16 @@
+html {
+    font-size: 17px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: PowderBlue;
+}
+
+h1 {
+    color: navy;
+    margin-left: 20px;
+}

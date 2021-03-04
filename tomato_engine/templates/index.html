@@ -2,45 +2,133 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"!-->
     <title>TOMATO</title>
   </head>
 
+  <style>
+
+  body, html {
+  margin: 0;
+  font-family: monospace;
+  text-align: center;
+  background: AliceBlue;
+  }
+  
+  h1 {
+  color: tomato;
+  font-family: monospace;
+  font-size: 25px;
+  }
+
+  .header {
+  padding: 50px;
+  text-align: center;
+  background: AliceBlue;
+  color: tomato;
+  font-family: monospace;
+  font-size: 20px;
+  }
+
+  .results {
+  text-align: left;
+  }
+  
+  .caption {
+  text-align: left;
+  }
+  
+  .main {
+  padding: 60px;
+  }
+  
+  h2 {
+  color: #FF8C00;
+  font-size: 20px;
+  font-family: Helvetica;
+  }
+  
+  h3 {
+  font-size: 15px;
+  }
+  
+  /*Resize the search nav to see the search bar change!*/
+  .search nav{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+  
+  </style>
+  
   <body>
     <!-- The top part of the page -->
     <div class="header">
+<<<<<<< HEAD
       {% if matches|length %} 
       <img src="../static/pingu2.png" width="250px" height="300px">
      {% else %}
      <img src="../static/pingu1.png" width="250px" height="300px">
      {% endif %}
       <h1>TOMATO ENGINE</h1>
+=======
+      <br>
+      <br>
+      <br>
+      <img src="../static/banner.png" width="500px" height="85px">
+      <p>A Popcorn for Penguins© production.</p>
+>>>>>>> 448b44733ee5159028d2fa8835ae20ae97a2c953
       <p>Happy {{ day }}!</p>
     </div>
 
     <!-- The search bar section -->
     <div class="search nav">
+<<<<<<< HEAD
       <p>Search for something</p>
+=======
+>>>>>>> 448b44733ee5159028d2fa8835ae20ae97a2c953
       <form>
-        <select name="mealtype">
-          {% for meal in mealtypes %}
-              <option value="{{ meal }}">{{ meal }}</option>
-          {% endfor %}
-        </select>
-        <input type="text" name="query" autofocus>
+       <!--select name="mealtype">
+         {% for meal in mealtypes %}
+           <option value="{{ meal }}">{{ meal }}</option>
+         {% endfor %}
+        </select!-->
+        <input type="text" placeholder="What are we eating today?" name="query" autofocus>
         <button type="submit" value="Search">Search</button>
       </form>
     </div>
-    
+    <br>
+    <br>
+    <br>
+
+    <!--input type="text" name="query" autofocus>
+    <button type="submit" value="Search">Search</button>
+    </form>
+    </div!-->
+
+    {% if matches|length %}
+    <img src="../static/pingu2_transparent.png" width="260px" height="370px">
+    {% else %}
+    <img src="../static/pingu1_transparent.png" width="260px" height="370px">
+    {% endif %}
+
     <!-- The returned document section ("main" section of our page) -->
     <div class="main">
          <!-- if "matches" are not empty (or None), print contents -->
          <thead>     
           <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
         </thead>
+<<<<<<< HEAD
+	{% if matches|length %}
+	<table class="search results">
+	  <!-- Title of the table -->
+=======
         {% if matches|length %} 
         <table class="search results">
           <!-- Title of the table -->
+>>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea
           {% for title, contents in matches.items() %}
             <!-- First row is the title -->
             <tr>
@@ -64,10 +152,15 @@
         <!-- if "matches" are empty (or None), print "tomato" or something -->
         {% else %}
         <tr>
-          {{ "Tomato" }}
+          <img src="../static/tomato.png" width="250px" height="230px">
         </tr>
         {% endif %}
       </table>
   </div>
 
+<<<<<<< HEAD
 </body>
+</html>
+=======
+</body>
+>>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea

@@ -10,9 +10,9 @@
     <!-- The top part of the page -->
     <div class="header">
       {% if matches|length %}
-      <img src="../static/pingu2_transparent.png" width="150px">
+      <img src="../static/pingu2_transparent.png" width="120px">
       {% else %}
-      <img src="../static/pingu1_transparent.png" width="150px">
+      <img src="../static/pingu1_transparent.png" width="120px">
       {% endif %}
       <br>
       <br>
@@ -46,8 +46,12 @@
     <!-- The returned document section ("main" section of our page) -->
     <div class="main">
          <!-- if "matches" are not empty (or None), print contents -->
-        <thead>     
+        <thead>   
+          {% if original_query == None %}  
+          <!-- nothing -->
+          {% else %}
           <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
+          {% endif %}
         </thead>
         {% if matches|length %} 
         <table class="search results">
@@ -73,6 +77,8 @@
             {% endfor %}
           {% endfor %}
         <!-- if "matches" are empty (or None), print "tomato" or something -->
+        {% elif original_query == None %}
+        <!-- nothing -->
         {% else %}
         <tr>
           <img src="../static/tomato.png" width="250px" height="230px">

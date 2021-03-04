@@ -66,29 +66,16 @@
   <body>
     <!-- The top part of the page -->
     <div class="header">
-<<<<<<< HEAD
-      {% if matches|length %} 
-      <img src="../static/pingu2.png" width="250px" height="300px">
-     {% else %}
-     <img src="../static/pingu1.png" width="250px" height="300px">
-     {% endif %}
-      <h1>TOMATO ENGINE</h1>
-=======
       <br>
       <br>
       <br>
       <img src="../static/banner.png" width="500px" height="85px">
       <p>A Popcorn for Penguins© production.</p>
->>>>>>> 448b44733ee5159028d2fa8835ae20ae97a2c953
       <p>Happy {{ day }}!</p>
     </div>
 
     <!-- The search bar section -->
     <div class="search nav">
-<<<<<<< HEAD
-      <p>Search for something</p>
-=======
->>>>>>> 448b44733ee5159028d2fa8835ae20ae97a2c953
       <form>
        <!--select name="mealtype">
          {% for meal in mealtypes %}
@@ -120,15 +107,9 @@
          <thead>     
           <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
         </thead>
-<<<<<<< HEAD
-	{% if matches|length %}
-	<table class="search results">
-	  <!-- Title of the table -->
-=======
         {% if matches|length %} 
         <table class="search results">
           <!-- Title of the table -->
->>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea
           {% for title, contents in matches.items() %}
             <!-- First row is the title -->
             <tr>
@@ -157,10 +138,5 @@
         {% endif %}
       </table>
   </div>
-
-<<<<<<< HEAD
 </body>
 </html>
-=======
-</body>
->>>>>>> 5ab7adee201f8611c23caec4a0fb9e8afd3fa1ea

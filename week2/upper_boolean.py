@@ -36,6 +36,8 @@ terms = cv.get_feature_names()
 terms_textfile = enchant.request_pwl_dict("data100_wordlist_3gram.txt") # Defining a personal wordlist (= pwl)
 unknownword_list = []
 
+#sparse_matrix_tf = 
+
 # TF-IDF
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 sparse_matrix = tfv5.fit_transform(documents).T.tocsr()

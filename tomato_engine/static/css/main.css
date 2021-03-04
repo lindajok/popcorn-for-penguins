@@ -2,6 +2,8 @@ body, html {
   margin: 0;
   font-family: sans-serif;
   text-align: center;
+  background-color: #47d5ff;
+  color:  white;
 }
 input {
   width: 400px;
@@ -12,11 +14,12 @@ input {
 .header {
   padding: 50px;
   text-align: center;
-  background: tomato;
-  color: white;
+  background: white;
+  color: tomato;
   font-size: 30px;
+  letter-spacing: 4px;
 }
-.results {
+.search.results {
   text-align: left;
 }
 .caption {
@@ -26,12 +29,12 @@ input {
   padding: 60px;
 }
 .tomato {
-  font-size: 100px;
+  font-size: 150px;
 }
 h2 {
-  color: #1abc9c;
   font-size: 20px;
   font-family: Helvetica;
+  letter-spacing: 1px;
 }
 h3 {
   font-size: 15px;

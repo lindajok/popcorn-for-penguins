@@ -9,17 +9,17 @@
   <body>
     <!-- The top part of the page -->
     <div class="header">
-      <h1>PFP document finder</h1>
+      {% if matches|length %} 
+      <img src="../static/pingu2.png" width="250px" height="300px">
+     {% else %}
+     <img src="../static/pingu1.png" width="250px" height="300px">
+     {% endif %}
+      <h1>TOMATO ENGINE</h1>
       <p>Happy {{ day }}!</p>
     </div>
 
     <!-- The search bar section -->
     <div class="search nav">
-      {% if matches|length %} 
-       <img src="../static/pingu2.png" width="250px" height="300px">
-      {% else %}
-      <img src="../static/pingu1.png" width="250px" height="300px">
-      {% endif %}
       <p>Search for something</p>
       <form>
         <select name="mealtype">

@@ -1,41 +1,52 @@
-body, html {
-  margin: 20;
-  font-family: sans-serif;
+  body, html {
+  margin: 0;
+  font-family: monospace;
   text-align: center;
-  background-color: #47d5ff;
-  color:  white;
-}
-input {
-  width: 400px;
-}
-.search.nav {
-  text-align: center;
-}
-.header {
+  background: AliceBlue;
+  }
+  
+  h1 {
+  color: tomato;
+  font-family: monospace;
+  font-size: 25px;
+  }
+
+  .header {
   padding: 50px;
   text-align: center;
-  background: white;
+  background: AliceBlue;
   color: tomato;
-  font-size: 30px;
-  letter-spacing: 4px;
-}
-.search.results {
+  font-family: monospace;
+  font-size: 20px;
+  }
+
+  .results {
   text-align: left;
-}
-.caption {
+  }
+  
+  .caption {
   text-align: left;
-}
-.main {
+  }
+  
+  .main {
   padding: 60px;
-}
-.tomato {
-  font-size: 150px;
-}
-h2 {
+  }
+  
+  h2 {
+  color: #FF8C00;
   font-size: 20px;
   font-family: Helvetica;
-  letter-spacing: 1px;
-}
-h3 {
+  }
+  
+  h3 {
   font-size: 15px;
-}
+  }
+  
+  /*Resize the search nav to see the search bar change!*/
+  .search nav{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }

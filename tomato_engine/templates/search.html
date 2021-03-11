@@ -1,41 +1,67 @@
 <!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+<div class="search">
  <html lang="en">
    <head>
      <meta charset="utf-8">
      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <title>TOMATO</title>
    </head>
 
-  <body>
-    <!-- The top part of the page -->
-    <div class="header">
-      {% if matches|length %}
-      <img src="../static/pingu2_transparent.png" width="120px">
-      {% else %}
-      <img src="../static/pingu1_transparent.png" width="120px">
-      {% endif %}
-      <br>
-      <br>
-      <br>
-      <img src="../static/banner.png" width="500px" height="85px">
-      <p>A Popcorn for Penguins© production.</p>
-      <p>Happy {{ day }}!</p>
-    </div>
+   <style>     
+     /* SEARCH BAR */
 
+     form.searchnav input[type=text] {
+     padding: 10px;
+     font-size: 18px;
+     font-family: monospace;
+     color: black;
+     border: 0px solid grey;
+     float: centered;
+     width: 21.5%;
+     background: white;
+     }
+
+     form.searchnav button {
+     float: centered;
+     width: 2%;
+     padding: 10px;
+     background-color: aliceblue;
+     color: tomato;
+     font-size: 17px;
+     border: 0px solid tomato;
+     border-left: none; /* Prevent double borders */
+     cursor: pointer;
+     }
+
+     form.searchnav a {
+     color: white;
+     }
+     
+   </style>
+   
+  <body>
     <!-- The search bar section -->
+    <br>
     <div class="search nav">
-      <form>
+      <form class="searchnav">
        <!--select name="mealtype">
          {% for meal in mealtypes %}
            <option value="{{ meal }}">{{ meal }}</option>
          {% endfor %}
         </select!-->
-        <input type="text" placeholder="What are we eating today?" name="query" autofocus>
-        <button type="submit" value="Search">Search</button>
+        <input type="text" placeholder="Happy {{ day }}! What are we eating today?" name="query" autofocus>
+        <button type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
     <br>
-    <br>
+    {% if matches|length %}
+    <img src="../static/pingu2_transparent.png" width="140px">
+    {% else %}
+    <img src="../static/pingu1_transparent.png" width="140px">
+    {% endif %}
     <br>
 
     <!--input type="text" name="query" autofocus>
@@ -86,5 +112,7 @@
         {% endif %}
       </table>
   </div>
-</body>
+  </body>
+</div>
+{% endblock %}
 </html>

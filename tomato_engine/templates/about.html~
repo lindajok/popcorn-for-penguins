@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+<div class="about">
+<html>
+  <body>
+    <p>Here you might find some plots about our data later. See ya!</p>
+  </body>
+</html>
+</div>
+{% endblock %}

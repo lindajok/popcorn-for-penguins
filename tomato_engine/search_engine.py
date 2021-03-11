@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import io
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import re
@@ -7,6 +7,8 @@ from datetime import datetime
 from nltk.stem import PorterStemmer
 import nltk
 from copy import deepcopy
+import matplotlib.pyplot as plt
+
 # from nltk.tokenize import sent_tokenize, word_tokenize
 stemmer = PorterStemmer()
 
@@ -108,6 +110,10 @@ def get_matches(user_input):
     return style(hits_list)
 
 
+@app.route('/')
+def redirect_to_search():
+    return redirect('/search', code=302)
+
 #Function search() is associated with the address base URL + "/search"
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -130,4 +136,12 @@ def search():
     except:
         matches = {}
     #Render index.html with matches variable
-    return render_template('index.html', matches=matches, day=day_name, mealtypes=mealtypes, original_query=query)
+    return render_template('search.html', matches=matches, day=day_name, mealtypes=mealtypes, original_query=query)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/recommendations')
+def recommend():
+    return render_template('recommend.html')

@@ -9,7 +9,6 @@ import nltk
 from copy import deepcopy
 import matplotlib.pyplot as plt
 
-# from nltk.tokenize import sent_tokenize, word_tokenize
 stemmer = PorterStemmer()
 
 #Initialize Flask instance
@@ -138,9 +137,29 @@ def search():
     #Render index.html with matches variable
     return render_template('search.html', matches=matches, day=day_name, mealtypes=mealtypes, original_query=query)
 
+
 @app.route('/about')
 def about():
+    def tomato_plot(recipes):
+        counter = 0
+        for ingredient in recipes:
+            if re.search(r"tomato", ingredient):
+                counter += 1
+
+        slices = [len(documents)-counter, counter]
+        labels = ["No tomatoes", "Tomatoes!"]
+        colors = ["#ff8c00", "#ff6347"]
+        explode = [0, 0.1]
+
+        plt.pie(slices, labels=labels, colors=colors, explode=explode)
+        plt.title("How many recipes contain tomatoes?")
+        plt.tight_layout()
+        plt.savefig(f'static/tomato_plot')
+    
+    tomato_plot(ingredients)
+
     return render_template('about.html')
+
 
 @app.route('/recommendations')
 def recommend():

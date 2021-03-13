@@ -23,9 +23,10 @@ def prepare_data():
     f.close()
     return documents
 
+# global variable for easier handling in the code
 documents = prepare_data()
 
-
+# Magic happening with term-document matrix
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b', ngram_range=(1, 3)) # 1gram: ngram_range=(1,1), 2gram: ngram_range=(2,2), from 1gram to 3gram: ngram_range=(1, 3) ... etc
 sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()
@@ -34,9 +35,7 @@ sparse_td_matrix = sparse_matrix.T.tocsr()
 t2i = cv.vocabulary_ # dictionary of terms
 terms = cv.get_feature_names()
 terms_textfile = enchant.request_pwl_dict("data100_wordlist_3gram.txt") # Defining a personal wordlist (= pwl)
-unknownword_list = []
-
-#sparse_matrix_tf = 
+unknownword_list = [] # for similar word suggestions
 
 # TF-IDF
 tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
@@ -50,6 +49,7 @@ f.close()
 
 
 def rewrite_token(t):
+    """ Rewrites every single token either as a boolean operator or in a format for further processing"""
     d = {"AND": "&",
      "OR": "|",
      "NOT": "1 -",

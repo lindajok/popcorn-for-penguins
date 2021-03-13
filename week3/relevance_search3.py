@@ -5,20 +5,21 @@ import numpy as np
 import nltk
 from nltk.stem import PorterStemmer
 import copy
-stemmer = PorterStemmer() # made it global
+stemmer = PorterStemmer() # global stemmer
 
 
-def stemming(list):
-    for i in range(len(list)):
-        words = nltk.word_tokenize(list[i]) 
+def stemming(lst):
+    """ Stem the documents and return them in list format """
+    for i in range(len(lst)):
+        words = nltk.word_tokenize(lst[i]) 
         words = [stemmer.stem(word) for word in words]                        
-        list[i] = ' '.join(words)
+        lst[i] = ' '.join(words)
 
-    return list
+    return lst
 
 
 def title_list():
-    """ Read a file and make a list with titles of the document """
+    """ Read a file and make a list of titles of the document """
     title_list = []
 
     f = io.open("data100.txt", mode="r", encoding="utf-8" )
@@ -34,7 +35,7 @@ def title_list():
 
 
 def prepare_data():
-    """ Read a file and make a list of strings """
+    """ Read a file and make a list of strings of the documents"""
     documents = []
     article = ""
     f = io.open("data100.txt", mode="r", encoding="utf-8" )
@@ -75,6 +76,7 @@ def print_results(user_input):
             print("No matching documents for query \"{}\"".format(user_input_string))
     except:
         print("Bad query")
+
 
 documents = prepare_data()
 documents_copy = copy.deepcopy(documents)

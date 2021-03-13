@@ -151,11 +151,12 @@ def about():
         colors = ["#ff8c00", "#ff6347"]
         explode = [0, 0.1]
 
-        plt.pie(slices, labels=labels, colors=colors, explode=explode)
+        plt.pie(slices, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%')
         plt.title("How many recipes contain tomatoes?")
         plt.tight_layout()
         plt.savefig(f'static/tomato_plot')
     
+
     tomato_plot(ingredients)
 
     return render_template('about.html')

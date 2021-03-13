@@ -1,4 +1,4 @@
-## Flask commands
+# Tomato Engine Commands
 
 The virtual environment `tomato` is already installed (see folder tomato), you just have to activate the environment:
 
@@ -6,12 +6,9 @@ The virtual environment `tomato` is already installed (see folder tomato), you j
 . tomato/bin/activate
 ```
 
-This environment has following libraries installed:
+There are all needed libraries installed in the `tomato` virtual environment. You don't have to download anything (except for Python3).
 
-- Flask
-- SciKit
-- NLTK
-- BeautifulSoup
+## Run Tomato Engine in Development Mode
 
 ### Set the following environment variables:
 

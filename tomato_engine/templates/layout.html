@@ -1,7 +1,53 @@
+
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <!--link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"!-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
   <style>
+    body, html {
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    background: AliceBlue;
+    }
+
+    h1 {
+    color: black;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    }
+
+    .header {
+    padding: 50px;
+    text-align: center;
+    background: AliceBlue;
+    color: tomato;
+    font-family: 'Space Mono', monospace;
+    font-size: 30px;
+    }
+
+    .results {
+    text-align: left;
+    }
+
+    .caption {
+    text-align: left;
+    }
+
+    .main {
+    padding: 60px;
+    }
+
+    h2 {
+    color: #FF8C00;
+    font-size: 18px;
+    }
+
+    h3 {
+    font-size: 15px;
+      }
+    
     /* NAVBAR */
 
     ul {
@@ -46,8 +92,9 @@
 	<br>
 	<br>
 	<br>
-	<h1 class="logo"><img src="../static/banner.png" width=30%></h1>
-	      <p>A Popcorn for Penguins© production.</p>
+	<h1 class="logo"><img src="../static/banner.png" width=30%>
+	<p>A Popcorn for Penguins© production.</p>
+	</h>
 	<strong><nav>
 	    <ul class="menu">
 	      <li><a href="{{ url_for('search') }}">Tomato Engine</a></li>

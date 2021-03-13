@@ -154,7 +154,7 @@ def about():
         plt.pie(slices, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%')
         plt.title("How many recipes contain tomatoes?")
         plt.tight_layout()
-        plt.savefig(f'static/tomato_plot')
+        plt.savefig(f'static/tomato_plot.png')
     
 
     tomato_plot(ingredients)

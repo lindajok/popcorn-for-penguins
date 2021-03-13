@@ -1,0 +1,43 @@
+  body, html {
+  margin: 0;
+  font-family: monospace;
+  text-align: center;
+  background: AliceBlue;
+  }
+  
+  h1 {
+  color: tomato;
+  font-family: monospace;
+  font-size: 25px;
+  }
+
+  .header {
+  padding: 50px;
+  text-align: center;
+  background: AliceBlue;
+  color: tomato;
+  font-family: monospace;
+  font-size: 20px;
+  }
+
+  .results {
+  text-align: left;
+  }
+  
+  .caption {
+  text-align: left;
+  }
+  
+  .main {
+  padding: 60px;
+  }
+  
+  h2 {
+  color: #FF8C00;
+  font-size: 20px;
+  font-family: Helvetica;
+  }
+  
+  h3 {
+  font-size: 15px;
+  }

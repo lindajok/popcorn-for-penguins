@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    /* NAVBAR */
+
+    ul {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    }
+
+    li {
+    float: left;
+    }
+
+    a {
+    display: block;
+    padding: 8px;
+    background-color: #aliceblue;
+    }
+
+    li a {
+    display: block;
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    /* Change the link color on hover */
+    li a:hover {
+    color: tomato;
+    }
+
+    /* Let user know where they are */
+    .active {
+    color: coral;
+    }
+  </style>
+  <body>
+    <header>
+      <div class="container">
+	<br>
+	<br>
+	<br>
+	<h1 class="logo"><img src="../static/banner.png" width=30%></h1>
+	      <p>A Popcorn for Penguins© production.</p>
+	<strong><nav>
+	    <ul class="menu">
+	      <li><a href="{{ url_for('search') }}">Tomato Engine</a></li>
+	      <li><a href="{{ url_for('about') }}">Get to know our recipes</a></li>
+              <li><a href="{{ url_for('recommend') }}">The chefs' recommendations</a></li>
+	    </ul>
+	</nav></strong>
+      </div>
+    </header>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+  </html>

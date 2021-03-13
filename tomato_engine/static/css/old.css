@@ -1,0 +1,41 @@
+body, html {
+  margin: 20;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #47d5ff;
+  color:  white;
+}
+input {
+  width: 400px;
+}
+.search.nav {
+  text-align: center;
+}
+.header {
+  padding: 50px;
+  text-align: center;
+  background: white;
+  color: tomato;
+  font-size: 30px;
+  letter-spacing: 4px;
+}
+.search.results {
+  text-align: left;
+}
+.caption {
+  text-align: left;
+}
+.main {
+  padding: 60px;
+}
+.tomato {
+  font-size: 150px;
+}
+h2 {
+  font-size: 20px;
+  font-family: Helvetica;
+  letter-spacing: 1px;
+}
+h3 {
+  font-size: 15px;
+}

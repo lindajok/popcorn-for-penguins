@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+<div class="search">
+ <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <title>TOMATO</title>
+   </head>
+
+   <style>     
+     /* SEARCH BAR */
+
+     form.searchnav input[type=text] {
+     padding: 10px;
+     font-size: 18px;
+     font-family: monospace;
+     color: black;
+     border: 0px solid grey;
+     float: centered;
+     width: 21.5%;
+     background: white;
+     }
+
+     form.searchnav button {
+     float: centered;
+     width: 2%;
+     padding: 10px;
+     background-color: aliceblue;
+     color: tomato;
+     font-size: 17px;
+     border: 0px solid tomato;
+     border-left: none; /* Prevent double borders */
+     cursor: pointer;
+     }
+
+     form.searchnav a {
+     color: white;
+     }
+     
+   </style>
+   
+  <body>
+    <!-- The search bar section -->
+    <br>
+    <div class="search nav">
+      <form class="searchnav">
+       <!--select name="mealtype">
+         {% for meal in mealtypes %}
+           <option value="{{ meal }}">{{ meal }}</option>
+         {% endfor %}
+        </select!-->
+        <input type="text" placeholder="Happy {{ day }}! What are we eating today?" name="query" autofocus>
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <br>
+    {% if matches|length %}
+    <img src="../static/pingu2_transparent.png" width="140px">
+    {% else %}
+    <img src="../static/pingu1_transparent.png" width="140px">
+    {% endif %}
+    <br>
+
+    <!--input type="text" name="query" autofocus>
+    <button type="submit" value="Search">Search</button>
+    </form>
+    </div!-->
+
+    <!-- The returned document section ("main" section of our page) -->
+    <div class="main">
+         <!-- if "matches" are not empty (or None), print contents -->
+        <thead>   
+          {% if original_query == None %}  
+          <!-- nothing -->
+          {% else %}
+          <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
+          {% endif %}
+        </thead>
+        {% if matches|length %} 
+        <table class="search results">
+          <!-- Title of the table -->
+          {% for title, contents in matches.items() %}
+            <!-- First row is the title -->
+            <tr>
+              <td><h2><u>{{ title }}</u></h2></td>
+            </tr>
+            <!-- Second row is the contents (with truncate you can change the amount od characters showing) -->
+            {% for ingredient in contents[0] %}
+            <tr>
+              <td><i>{{ ingredient }}</i></td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td></td>
+            </tr>
+            {% for method in contents[1] %}
+            <tr>
+                <td>{{ method | truncate(700) }}</td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+        <!-- if "matches" are empty (or None), print "tomato" or something -->
+        {% elif original_query == None %}
+        <!-- nothing -->
+        {% else %}
+        <tr>
+          <img src="../static/tomato.png" width="250px" height="230px">
+        </tr>
+        {% endif %}
+      </table>
+  </div>
+  </body>
+</div>
+{% endblock %}
+</html>

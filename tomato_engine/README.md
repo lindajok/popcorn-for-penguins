@@ -46,16 +46,16 @@ deactivate
 
 ## WINDOWS
 ```
-py -3 -m venv demoenv
+py -3 -m venv tomato
 ```
 
 ```
-demoenv/Scripts/activate
+tomato/Scripts/activate
 ```
 On Windows command line, you can the environment variables with:
 
 ```
-set FLASK_APP=flaskdemo.py
+set FLASK_APP=search_engine.py
 set FLASK_ENV=development
 set FLASK_RUN_PORT=8000
 ```

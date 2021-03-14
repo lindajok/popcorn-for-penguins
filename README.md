@@ -65,9 +65,24 @@ Recipes from [BBC Good Food](https://www.bbcgoodfood.com/) scraped using [Webscr
 
 Few code snippets used from [Mathias Creutz's NLP Tutorials](https://github.com/mathiascreutz/nlp-tutorials)
 
+Libraries and modules:
+
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
+- [scikit-learn](https://scikit-learn.org/stable/)
+- [NumPy](https://numpy.org/)
+- [NLTK](https://www.nltk.org/)
+- [Matplotlib](https://matplotlib.org/)
+- [io](https://docs.python.org/3/library/io.html)
+- [re](https://docs.python.org/3/library/re.html)
+- [datetime](https://docs.python.org/3/library/datetime.html)
+- [copy](https://docs.python.org/3/library/copy.html)
+- [collections](https://docs.python.org/3/library/collections.html)
+
+
 ### Contributors
 
-Project by Linda, Mája, and Anna-Erika
+Project by [Linda](https://github.com/lindajok), [Mája](https://github.com/AiKuroyake), and [Anna-Erika](https://github.com/annaerika)
 
 ![This is fine](https://media2.giphy.com/media/QMHoU66sBXqqLqYvGO/giphy.gif)
 

@@ -150,10 +150,12 @@ def search():
     result_type = request.args.get('result_type')
     #Initialize list of matches
     matches = []
-
+    
+    print(result_type)
     #If query exists (i.e. is not None)
     try:
         if query:
+
             if result_type == "all":
                 matches = get_all_matches(query)
             if result_type == "exact":
@@ -161,7 +163,7 @@ def search():
     except:
         matches = {}
     #Render index.html with matches variable
-    return render_template('search.html', matches=matches, day=day_name, original_query=query)
+    return render_template('search.html', matches=matches, day=day_name, original_query=query, result_type=result_type)
 
 
 @app.route('/about')

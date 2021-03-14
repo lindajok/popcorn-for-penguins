@@ -8,6 +8,7 @@ from nltk.stem import PorterStemmer
 import nltk
 from copy import deepcopy
 import matplotlib.pyplot as plt
+from collections import Counter
 
 stemmer = PorterStemmer()
 
@@ -135,9 +136,55 @@ def get_exact_matches(user_input):
     return style(hits_list)
 
 
+def tomato_plot(recipes):
+    counter = 0
+    for ingredient in recipes:
+        if re.search(r"tomato", ingredient):
+            counter += 1
+
+    slices = [len(documents)-counter, counter]
+    labels = ["No tomatoes", "Tomatoes!"]
+    colors = ["#ff8c00", "#ff6347"]
+    explode = [0, 0.1]
+    
+    plt.figure(1)
+    plt.pie(slices, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%')
+    plt.title("How many recipes contain tomatoes?")
+    plt.tight_layout()
+    plt.savefig(f'static/tomato_plot.png')
+
+
+def difficulty_plot(recip):
+    recipe_steps = []
+    steps_x = []
+    recipes_num_y = []
+    
+    for steps in recip:
+        steps_counter = 0
+        for step in steps.split('*'):
+            if re.search(r"STEP", step):
+                steps_counter += 1
+        recipe_steps.append(steps_counter)
+    
+    recipe_steps = Counter(recipe_steps)
+    for el in recipe_steps:
+        steps_x.append(el)
+        recipes_num_y.append(recipe_steps[el])
+
+    plt.figure(2) 
+    plt.bar(steps_x, recipes_num_y, color="#ff6347")
+    plt.xticks(ticks=steps_x, labels=steps_x)
+    plt.title("Recipes Difficulty Distribution")
+    plt.xlabel("Steps")
+    plt.ylabel("Recipes")
+    plt.tight_layout()
+    plt.savefig(f'static/difficulty_plot.png')
+
+
 @app.route('/')
 def redirect_to_search():
     return redirect('/search', code=302)
+
 
 #Function search() is associated with the address base URL + "/search"
 @app.route('/search', methods=['GET', 'POST'])
@@ -167,25 +214,8 @@ def search():
 
 @app.route('/about')
 def about():
-    def tomato_plot(recipes):
-        counter = 0
-        for ingredient in recipes:
-            if re.search(r"tomato", ingredient):
-                counter += 1
-
-        slices = [len(documents)-counter, counter]
-        labels = ["No tomatoes", "Tomatoes!"]
-        colors = ["#ff8c00", "#ff6347"]
-        explode = [0, 0.1]
-
-        plt.pie(slices, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%')
-        plt.title("How many recipes contain tomatoes?")
-        plt.tight_layout()
-        plt.savefig(f'static/tomato_plot.png')
-    
-
     tomato_plot(ingredients)
-
+    difficulty_plot(documents)
     return render_template('about.html')
 
 

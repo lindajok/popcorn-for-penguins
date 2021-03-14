@@ -151,7 +151,6 @@ def search():
     #Initialize list of matches
     matches = []
     
-    print(result_type)
     #If query exists (i.e. is not None)
     try:
         if query:

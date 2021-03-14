@@ -192,9 +192,8 @@ def recommend():
     return render_template('recommend.html')
 
 
-@app.route('/whole_recipe/<title>')
-def whole_recipe(title):
-    title = request.args.get('title')
+@app.route('/show_recipe/<name>')
+def show_recipe(name):
     ingredients = request.args.getlist('ingredients')
     methods = request.args.getlist('methods')
-    return render_template('whole_recipe.html', title=title, ingredients=ingredients, methods=methods)
+    return render_template('show_recipe.html', name=name, ingredients=ingredients, methods=methods)

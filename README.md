@@ -6,6 +6,8 @@ To read more about the code, go to our [Wiki](https://github.com/lindajok/popcor
 
 ## Tomato Engine 
 
+![Tomato Engine Preview](https://github.com/lindajok/popcorn-for-penguins/blob/main/preview.png "Tomato Engine Preview")
+
 ### What is Tomato Engine?
 
 Tomato Engine is a simple search engine which allows you to browse through nearly 1000 (yes, there are 3 zeros!) recipes. You can search for the simplest word such as *'tomato'*, or use Boolean search to find *'tomato AND NOT ladle'* if you lack kitchen utensils!
@@ -15,8 +17,6 @@ Tomato Engine is easy to use! We did all the dirty work with virtual environment
 Nice bonus: we're OS friendly which means you can enjoy the art of food making using either Linux, Mac, or Windows.
 
 Side note: Tomato Engine speaks British English
-
-![Tomato Engine Preview](https://github.com/lindajok/popcorn-for-penguins/blob/main/preview.png "Tomato Engine Preview")
 
 ### How to use it?
 

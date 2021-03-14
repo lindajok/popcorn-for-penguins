@@ -114,9 +114,10 @@ def style(hits):
     for doc_idx in hits:
         content = []
         title = titles[doc_idx]
-        ingredients = ingredients[doc_idx].split("*")
-        cleaned_ingredients = [re.sub(r' ,', ',', ingr) for ingr in ingredients]
+        dirty_ingredients = ingredients[doc_idx].split("*")
+        cleaned_ingredients = [re.sub(r' ,', ',', ingr) for ingr in dirty_ingredients]
         content.append(cleaned_ingredients)
+        # content.append(ingredients[doc_idx].split("*"))
         content.append(documents[doc_idx].split("*"))
         recipe[title]=content
     return recipe
@@ -149,10 +150,11 @@ def search():
     result_type = request.args.get('result_type')
     #Initialize list of matches
     matches = []
-
+    
     #If query exists (i.e. is not None)
     try:
         if query:
+
             if result_type == "all":
                 matches = get_all_matches(query)
             if result_type == "exact":
@@ -160,7 +162,7 @@ def search():
     except:
         matches = {}
     #Render index.html with matches variable
-    return render_template('search.html', matches=matches, day=day_name, original_query=query)
+    return render_template('search.html', matches=matches, day=day_name, original_query=query, result_type=result_type)
 
 
 @app.route('/about')

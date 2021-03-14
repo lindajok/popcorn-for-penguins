@@ -114,7 +114,9 @@ def style(hits):
     for doc_idx in hits:
         content = []
         title = titles[doc_idx]
-        content.append(ingredients[doc_idx].split("*"))
+        ingredients = ingredients[doc_idx].split("*")
+        cleaned_ingredients = [re.sub(r' ,', ',', ingr) for ingr in ingredients]
+        content.append(cleaned_ingredients)
         content.append(documents[doc_idx].split("*"))
         recipe[title]=content
     return recipe

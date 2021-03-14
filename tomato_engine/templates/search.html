@@ -48,21 +48,17 @@
     <br>
     <div class="search nav">
       <form class="searchnav">
-       <!--select name="mealtype">
-         {% for meal in mealtypes %}
-           <option value="{{ meal }}">{{ meal }}</option>
-         {% endfor %}
-        </select!-->
         <input type="radio" id="exact" name="result_type" value="exact">
-        <label for="boolean">Search exact match</label>
+        <label for="boolean">Search exact</label>
         <input type="radio" id="all" name="result_type" value="all">
-        <label for="relevance">Show all matches</label><br>
-
+        <label for="relevance">Show all</label><br>
         <input type="text" placeholder="Happy {{ day }}! What are we eating today?" name="query" autofocus>
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
     <br>
+
+    <!-- Pingu -->
     {% if matches|length %}
     <img src="../static/pingu2_transparent.png" width="140px">
     {% else %}
@@ -70,45 +66,27 @@
     {% endif %}
     <br>
 
-    <!--input type="text" name="query" autofocus>
-    <button type="submit" value="Search">Search</button>
-    </form>
-    </div!-->
-
-    <!-- The returned document section ("main" section of our page) -->
+    <!-- Recipe titles -->
     <div class="main">
-         <!-- if "matches" are not empty (or None), print contents -->
         <thead>   
-          {% if original_query == None %}  
-          <!-- nothing -->
+          {% if original_query == None %} 
+           
           {% else %}
           <div class="caption"><h3>{{ matches|length }} results for query <i>{{original_query}}</i></h3></div>
           {% endif %}
         </thead>
         {% if matches|length %} 
         <table class="search results">
-          <!-- Title of the table -->
           {% for title, contents in matches.items() %}
-            <!-- First row is the title -->
             <tr>
-              <td><h2><u>{{ title }}</u></h2></td>
+              <td><a href="{{ url_for('whole_recipe', title=title, ingredients=contents[0], methods=contents[1], name=title) }}" type="list"><h2><u>{{ title }}</u></h2></a></td>
             </tr>
-            <!-- Second row is the contents (with truncate you can change the amount od characters showing) -->
-            {% for ingredient in contents[0] %}
+            {% for snippet in contents[1][1:2] %}
             <tr>
-              <td><i>{{ ingredient }}</i></td>
-            </tr>
-            {% endfor %}
-            <tr>
-              <td></td>
-            </tr>
-            {% for method in contents[1] %}
-            <tr>
-                <td>{{ method | truncate(700) }}</td>
+                <td>{{ snippet | truncate(150) }}</td>
             </tr>
             {% endfor %}
           {% endfor %}
-        <!-- if "matches" are empty (or None), print "tomato" or something -->
         {% elif original_query == None %}
         <!-- nothing -->
         {% else %}

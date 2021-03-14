@@ -12,7 +12,10 @@
       <div class="main">
         <table class="search results">
            <tr>
-             <td><h2>{{ name }}</h2></td>
+             <td><h2>{{ name }}</h2>
+              <br>
+            </td>
+
            </tr>
            {% for ingr in ingredients %}
            <tr>
@@ -20,7 +23,9 @@
            </tr>
            {% endfor %}
            <tr>
-            <td></td>
+            <td>
+              <br>
+            </td>
           </tr>
            {% for method in methods %}
            <tr>

@@ -89,12 +89,12 @@
           {% for name, contents in matches.items() %}
             <tr>
               <td><a href="{{ url_for('show_recipe', name=name, ingredients=contents[0], methods=contents[1])}}" type="list"><h2><u>{{ name }}</u></h2></a></td>
-            </tr>
+            <!-- </tr>
             {% for snippet in contents[1][1:2] %}
             <tr>
                 <td>{{ snippet | truncate(150) }}</td>
             </tr>
-            {% endfor %}
+            {% endfor %} -->
           {% endfor %}
         {% elif original_query == None %}
         <!-- nothing -->

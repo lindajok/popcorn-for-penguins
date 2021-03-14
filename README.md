@@ -24,7 +24,7 @@ Side note: Tomato Engine speaks British English
 4. Activate the tomato virtual environment with `. tomato/bin/activate`
 5. Set the environment variables:
 
-   __Linux & Mac:___
+   __Linux & Mac:__
 
    `export FLASK_APP=search_engine.py`
    
@@ -61,6 +61,8 @@ Project by Linda, Mája, and Anna-Erika
 
 ![This is fine](https://media2.giphy.com/media/QMHoU66sBXqqLqYvGO/giphy.gif)
 
-# DO JUDGE THE BOOK BY ITS COVER!!!
-# AT LEAST WE HAVE A VISION
-# <3
+DO JUDGE THE BOOK BY ITS COVER!!!
+
+AT LEAST WE HAVE A VISION
+
+<3

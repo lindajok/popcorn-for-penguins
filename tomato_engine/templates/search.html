@@ -53,6 +53,11 @@
            <option value="{{ meal }}">{{ meal }}</option>
          {% endfor %}
         </select!-->
+        <input type="radio" id="exact" name="result_type" value="exact">
+        <label for="boolean">Search exact match</label><br>
+        <input type="radio" id="all" name="result_type" value="all">
+        <label for="relevance">Show all matches</label><br>
+
         <input type="text" placeholder="Happy {{ day }}! What are we eating today?" name="query" autofocus>
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>

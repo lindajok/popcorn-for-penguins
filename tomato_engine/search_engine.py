@@ -52,27 +52,29 @@ ingredients = get_ingredients()
 documents = methods()
 copy_documents = deepcopy(documents)
 stemmed_documents = (stem(copy_documents))
-
 cv = CountVectorizer(lowercase=True, binary=True, token_pattern=r'(?u)\b\w+\b')
-sparse_matrix = cv.fit_transform(stemmed_documents)
+
+
+# not stemmed version
+sparse_matrix = cv.fit_transform(documents)
 dense_matrix = sparse_matrix.todense()
 td_matrix = dense_matrix.T
 sparse_td_matrix = sparse_matrix.T.tocsr()
 t2i = cv.vocabulary_ 
 terms = cv.get_feature_names()
 
-tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
-sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
+
+# stemmed version
+stemmed_sparse_matrix = cv.fit_transform(stemmed_documents)
+stemmed_dense_matrix = stemmed_sparse_matrix.todense()
+stemmed_td_matrix = stemmed_dense_matrix.T
+stemmed_sparse_td_matrix = stemmed_sparse_matrix.T.tocsr()
+stemmed_t2i = cv.vocabulary_ 
+stemmed_terms = cv.get_feature_names()
 
 
-def stem_query(query):
-    boolean = ["AND", "OR", "NOT", "(", ")"]
-    for word in query.split():
-        if word not in boolean:
-            stemmed = stemmer.stem(word)
-            print(stemmed)
-            query = re.sub(word, stemmed, query)
-    return query
+# tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
+# sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
 
 
 def rewrite_token(t):
@@ -92,6 +94,23 @@ def rewrite_query(query): # rewrite every token in the query
     return " ".join(rewrite_token(t) for t in query.split())
 
 
+def rewrite_stemmed_token(t):
+    d = {"AND": "&",
+     "OR": "|",
+     "NOT": "1 -",
+     "(": "(", ")": ")"}
+    if t in d:
+        return d.get(t)
+    elif t.lower() in terms:
+        return 'stemmed_sparse_td_matrix[stemmed_t2i["{:s}"]].todense()'.format(stemmer.stem(t.lower()))
+    else:
+        return 'np.matrix(np.zeros(len(documents), dtype=int))'
+
+
+def rewrite_stemmed_query(query): 
+    return " ".join(rewrite_stemmed_token(t) for t in query.split())
+
+
 def style(hits):
     recipe = {}
     for doc_idx in hits:
@@ -103,7 +122,13 @@ def style(hits):
     return recipe
 
 
-def get_matches(user_input):
+def get_all_matches(user_input):
+    hits_matrix = eval(rewrite_stemmed_query(user_input))
+    hits_list = list(hits_matrix.nonzero()[1])
+    return style(hits_list)
+
+
+def get_exact_matches(user_input):
     hits_matrix = eval(rewrite_query(user_input))
     hits_list = list(hits_matrix.nonzero()[1])
     return style(hits_list)
@@ -119,23 +144,23 @@ def search():
     today = datetime.today()
     day_name = today.strftime("%A")
 
-    mealtypes = ['-', 'Starter', 'Main', 'Dessert']
-
     #Get query from URL variable
     query = request.args.get('query')
-
+    result_type = request.args.get('result_type')
     #Initialize list of matches
     matches = []
 
     #If query exists (i.e. is not None)
     try:
         if query:
-            stemmed_query = stem_query(query)
-            matches = get_matches(stemmed_query)
+            if result_type == "all":
+                matches = get_all_matches(query)
+            if result_type == "exact":
+                matches = get_exact_matches(query)
     except:
         matches = {}
     #Render index.html with matches variable
-    return render_template('search.html', matches=matches, day=day_name, mealtypes=mealtypes, original_query=query)
+    return render_template('search.html', matches=matches, day=day_name, original_query=query)
 
 
 @app.route('/about')

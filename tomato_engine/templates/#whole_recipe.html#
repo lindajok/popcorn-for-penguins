@@ -11,9 +11,9 @@
     <body>
       <div class="main">
         <table class="search results">
-	   {% for titl in title %}
+	   {% for t in title %}
 	   <tr>
-             <td><i>{{ title }}<i></td>
+             <td><i>{{ t }}<i></td>
            </tr>
 	   {% endfor %}
 	   <tr>

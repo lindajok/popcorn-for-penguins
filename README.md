@@ -16,6 +16,8 @@ Nice bonus: we're OS friendly which means you can enjoy the art of food making u
 
 Side note: Tomato Engine speaks British English
 
+![Tomato Engine Preview](https://github.com/lindajok/popcorn-for-penguins/blob/main/preview.png "Tomato Engine Preview")
+
 ### How to use it?
 
 1. Clone this repository using `git clone`

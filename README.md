@@ -43,9 +43,17 @@ Side note: Tomato Engine speaks British English
    `$env:FLASK_RUN_PORT = '8000'`
    
    Make sure to set these every time you run a new Tomato Engine session. The virtual environment doesn't remember them.
+   
 6. Run Tomato Engine `flask run`
 7. Go to `localhost:8000/search` in your browser to search the recipes
-8. To leave Tomato Engine, simply close your browser and stop the program (`Ctrl+C` or whatever you're using). To leave the virtual environment, simply type `deactivate`
+8. Choose ` Search exact` to search for exact match, or `Show all` to show all recipes containing searched items
+9. In the search bar, type one word such as *tomato*, or connect several words using boolean values such as *tomato AND pasta*
+
+   __NB: Be sure to type the boolean operator in UPPERCASE, otherwise the search won't work!__
+
+10. To see the whole recipe, click on the recipe's name. You will be redirected and able to see the whole recipe
+11. Check few interesting plots under *Get to know your recipes* bookmark
+12. To leave Tomato Engine, simply close your browser and stop the program (`Ctrl+C` or whatever you're using). To leave the virtual environment, simply type `deactivate`
 
 ### Resources
 

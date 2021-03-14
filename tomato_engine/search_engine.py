@@ -73,15 +73,17 @@ stemmed_t2i = cv.vocabulary_
 stemmed_terms = cv.get_feature_names()
 
 
+d = {"AND": "&",
+    "OR": "|",
+    "NOT": "1 -",
+    "(": "(", ")": ")"}
+
+
 # tfv5 = TfidfVectorizer(lowercase=True, sublinear_tf=True, use_idf=True, norm="l2", token_pattern=r'(?u)\b\w+\b')
 # sparse_matrix = tfv5.fit_transform(documents).T.tocsr()
 
 
 def rewrite_token(t):
-    d = {"AND": "&",
-     "OR": "|",
-     "NOT": "1 -",
-     "(": "(", ")": ")"}
     if t in d:
         return d.get(t)
     elif t.lower() in terms:
@@ -95,10 +97,6 @@ def rewrite_query(query): # rewrite every token in the query
 
 
 def rewrite_stemmed_token(t):
-    d = {"AND": "&",
-     "OR": "|",
-     "NOT": "1 -",
-     "(": "(", ")": ")"}
     if t in d:
         return d.get(t)
     elif t.lower() in terms:
